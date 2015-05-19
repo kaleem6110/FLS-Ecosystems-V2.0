@@ -373,7 +373,7 @@
                     <value><![CDATA[Latitude]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[java.lang.Double]]></value>
+                    <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[Latitude/Longitude]]></value>
@@ -389,7 +389,7 @@
                     <value><![CDATA[LatitudeStr]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[java.lang.Double]]></value>
+                    <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[LatitudeStr]]></value>
@@ -408,7 +408,7 @@
                     <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[Location QR Code]]></value>
+                    <value><![CDATA[QRcode]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[false]]></value>
