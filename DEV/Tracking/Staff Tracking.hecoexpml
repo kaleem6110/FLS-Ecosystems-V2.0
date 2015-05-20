@@ -1074,7 +1074,12 @@
                     <value><![CDATA[268]]></value>
                 </section>
                 <section name="alerttime">
-                    <value><![CDATA[05/19/2015 15:57:10]]></value>
+                    <section name="script">
+                        <value><![CDATA[getAlertTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="alertsourcetype">
                     <value><![CDATA[247]]></value>
@@ -1128,75 +1133,46 @@ Map<String, List> safeUnsafeMap = com.wfp.jobs.RestTrackingJob.safeUnsafeMap;
 List<String> criticalUserList =(List<String>) safeUnsafeMap.get("CRITICAL");
 List<String> safeUserList = (List<String>)safeUnsafeMap.get("NORMAL");
 HttpSession session= null;
-
 List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
-	List<String> userOrgList = null;
-	Rubberbandregions rubberbandregions = null; 
-	long moduleId = 0L; 
+List<String> userOrgList = null;
+long moduleId = 0L; 
 	static
 	{
 		if(Cache.retrieve("$ALERT_SERVICE$") == null){
 			Cache.store("$ALERT_SERVICE$", new HashMap<String, Object>());
 		}
 	}
-	boolean authorizeDevice()
-	{	 boolean isValid=false;
-		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
+boolean authorizeDevice()
+{		boolean isValid=false;
+	    com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
 		try
 		{
 			Date t = CommonUtils.parseDate($artefact.getAttributeValueAsString("ptime"), IEPICConstants.NEW_PORTAL_DATE_FORMAT );
 		 	if( t!=null && t.getYear()>115 ) return false; 
-			if(userProfilesList ==null ) userProfilesList = com.wfp.utils.LDAPUtils.getUserProfilesList( userbean.getUserUniqueId());
-	
+			if(userProfilesList ==null ) userProfilesList = com.wfp.utils.LDAPUtils.getUserProfilesList( userbean.getUserUniqueId());	
 		}catch(Exception e){ }	
 		String deviceId = $artefact.getAttributeValueAsString("deviceId"); 
 		List<String> deviceMissionList = LDAPUtils.getLDAPUserDtlsMap().get(deviceId).getAuthorizedGroupsList();
 	  	List<String> userMissionList = getUserMissionList( userbean.getUserUniqueId() );  	
 	  	if(  userMissionList!=null && deviceMissionList!=null )
-	  	{
-	  		
-	  		for(String deviceMission: deviceMissionList   )
-	  		{
-	  		    if( userMissionList.contains( deviceMission ) )
-	  		     {  		     
-	  		     	if( userOrgList == null ) userOrgList= LDAPWSUtils.getOrganizationByUnit( getUserUniqueId() );
-	  		     	
-	  		     	if( CommonUtils.isOrgMatches( userOrgList , $artefact.getAttributeValueAsString("Organization") ) ) 
-	  		     	{ isValid= true;  }
-	  		     }
+  		{		for(String deviceMission: deviceMissionList   )
+	  			{
+		  		   	 if( userMissionList.contains( deviceMission ) )
+		  		     {  		     
+		  		     	if( userOrgList == null ) userOrgList= LDAPWSUtils.getOrganizationByUnit( getUserUniqueId() );		  		     	
+		  		     	if( CommonUtils.isOrgMatches( userOrgList , $artefact.getAttributeValueAsString("Organization") ) ) isValid= true; 		  		     	
+		  		     }
 	  		}
 	  	}
 	  	return isValid;
-	}
-		 
-	void bindData() 
-	{
+}		 
+void bindData() 
+{
 		try	
 		{
 		 	com.wfp.security.form.DeviceBean data = (com.wfp.security.form.DeviceBean )$trackingdatamodel;	 	
 		 	if (data != null)	
-		 	{ 	 
-		 		System.out.println("criticalUserList:"+criticalUserList);
-		 		if(session==null)session= getEcosystemSession();
-		 		session.setAttribute("staff_description", getDescription1());
-				session.setAttribute("staff_pointOfContact", getPointOfContact());
-				session.setAttribute("staff_pointOfContactMailId", getpointOfContactMailId());
-				session.setAttribute("staff_dataOwner", getDataOwner());
-				session.setAttribute("staff_layerCreationDate", getLayerCreationDate());
-				session.setAttribute("staff_layerAuthor", getLayerAuthor());
-				session.setAttribute("staff_LayerModificationDate", getLayerModificationDate());
-				session.setAttribute("staff_LayerModificationAuthor", getlayerModificationAuthor());
-				
-				session.setAttribute("staff_version", getVersion());
-				session.setAttribute("staff_changelogLink", getChangelogLink());
-				
-				session.setAttribute("staff_dataSourceAndUpdateFrequencyLDAP", getDataSourceAndUpdateFrequencyLDAP());
-				session.setAttribute("staff_dataSourceAndUpdateFrequencyMiddleware", getDataSourceAndUpdateFrequencyMiddleware());
-				session.setAttribute("staff_middlewareDataSourceAndUpdateFrequency", getMiddlewareDataSourceAndUpdateFrequency());
-				session.setAttribute("staff_geographicalReferenceType", getGeographicalReferenceType());
-				session.setAttribute("staff_geographicalRefernceProjectionInformation", getGeographicalRefernceProjectionInformation());
-				
-					
+		 	{		
 		 		$artefact.setCoordinates(data.getLatitude(), data.getLongitude());	 							
 				$artefact.addAttribute("title", data.getTitle());//System.out.println( data.getInternalID() );
 				//List<String> internalIdList = data.getInternalID();
@@ -1257,10 +1233,7 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 			 	if( data.getNoOfDays().equals("0") ) data.setNoOfDays("1");
 			 	$artefact.addAttribute("noOfDays",  data.getNoOfDays());		 	
 			 	if( !data.getTotalWaypoints().equals("1") )
-			 	$artefact.addAttribute("fetchHistory", data.getName());
-			 	
-			 	
-			 	
+			 	$artefact.addAttribute("fetchHistory", data.getName());		 	
 			 	
 			 	String city = data.getLocality().replace("[","").replace("]","");
 			 	if(city!=null&&city!=""){		 	
@@ -1288,8 +1261,7 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 				{
 					 skype = skype.replace("skype:","").replace("|","");
 					 $artefact.addAttribute("Skype", skype );
-				}
-				
+				}				
 				String gtalk = CommonUtils.getMessaging(data.getSkypePager(),"gtalk" );
 				if(gtalk!=null)
 				{
@@ -1309,16 +1281,15 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 					$artefact.addAttribute("BBpin", BBpin);
 				}
 				$artefact.addAttribute("QRcode", "QRcode");
-				$artefact.addAttribute("vCard", "vCard");
-			
+				$artefact.addAttribute("vCard", "vCard");			
 			}  
 		} 
 		catch (Exception e){ 
 			e.printStackTrace();
 		}
-	}
-	String getResidentId(String s)
-	{ 
+}
+String getResidentId(String s)
+{ 
 	 	if(s!=null&&s!="" &&s.indexOf("office")>-1 )
 	 	{
 	 		String[] a= s.split("unitId=");
@@ -1328,9 +1299,9 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 	 		 //return s; 		
 	 	}
 	 	return "-";
-	 }
-	String getFullName(com.wfp.security.form.DeviceBean data)
-	{
+}
+String getFullName(com.wfp.security.form.DeviceBean data)
+{
 		String fullName = "";	
 		if(!com.enterprisehorizons.util.StringUtils.isNull(data.getCn())){
 			fullName = data.getCn()+" ";
@@ -1339,33 +1310,26 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 			fullName += data.getSn();
 		}	
 		return fullName;
-	}
-	String getName(){ return $artefact.getAttributeValueAsString("deviceId"); }
+}
+String getName(){ return $artefact.getAttributeValueAsString("deviceId"); }
 	
-	Date getPresentDate() { return CommonUtils.stringDateToDate("2014-02-26 10:55:00", IEPICConstants.NEW_PORTAL_DATE_FORMAT ) ; }
+Date getPresentDate() { return CommonUtils.stringDateToDate("2014-02-26 10:55:00", IEPICConstants.NEW_PORTAL_DATE_FORMAT ) ; }
 	
-	String getOwner()   
-	{
+String getOwner()   
+{
 		if($artefact != null){
 			return $artefact.getAttributeValueAsString("owner");
 		}
 		return "No Name" ;
-	}
-	String getDeviceCaption(){
+}
+String getDeviceCaption(){
 		if(!com.enterprisehorizons.util.StringUtils.isNull($artefact.getAttributeValueAsString("owner"))){
 			return $artefact.getAttributeValueAsString("owner");
 		}
 		return  $artefact.getAttributeValueAsString("deviceId");
-	}
-	String getIconUrl(){ return "serverresources/FLS/icons/epic/Tracking_Staff_K.png"; }
-	String getIconUrl_G(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_G.png"; }
-	String getIconUrl_C(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_C.png"; }
-	String getIconUrl_W(){  return "serverresources/FLS/icons/epic/Tracking_Staff_Y.png"; }
-	String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.png"; }
-	String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png";  }    
-	  
-	String getStyle()
-	{	
+}
+String getStyle()
+{	
 		if(isInDangerZone()) { System.out.println("critical");return "critical"; }
 		Date time = (Date) $artefact.getAttributeValue("time");	
 		if(time!=null )
@@ -1377,20 +1341,17 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 			else if(hrs>23&&hrs <120 ) return "lastWeekReported";		
 		}
 		return "placemarkstyle";
-	} 
-	boolean isSafe()
-	{
-	
-	return false;
-	}
-	boolean isInDangerZone()
-	{ 	boolean isInDanger= false;
+} 
+boolean isSafe(){ return false; }
+boolean isInDangerZone()
+{
+	 	boolean isInDanger= false;
 		String uid = $artefact.getAttributeValueAsString("userID");		
 		 for( String s: criticalUserList )
 		 {
 		   if( s.contains(uid) ) isInDanger= true;		 
 		 }
-		//Below code works for STI fences.
+		//Below code works for STI fences.DONT REMOVE
 		//com.spacetimeinsight.db.model.util.DataModelsCache.getInstance().refresh(LassoTemplate.class.getName());
 		//Coordinate c = new Coordinate( Double.parseDouble( $artefact.getAttributeValueAsString("LatitudeStr") ),
 		//Double.parseDouble(  $artefact.getAttributeValueAsString("LongitudeStr"))  );	
@@ -1401,158 +1362,126 @@ List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 		//return isIndanger;	
 		if( isInDanger )System.out.println( uid +"  in danger ");
 		return isInDanger;
-	}
-	String getDangerZoneName()
-	{
-		String deviceId = $artefact.getAttributeValueAsString("deviceId");	
-		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();	
-		moduleId = RBRegionsUtils.getModuleId(getLayerId());
-		rubberbandregions = RBRegionsUtils.getUserModuleRubberbandregion(userbean.getDomainId(), userbean.getLanguageId(), 
-					userbean.getUserId(), userbean.getUserUniqueId(), moduleId, getLayerName()+"_DZ");	
-		return  RBRegionsUtils.getDanzerZoneName(rubberbandregions, $artefact.getFirstPoint());	
-	}
-	String getURL()
-	{
-		long moduleId = RBRegionsUtils.getModuleId(getLayerId());
-		String serverRootUrl = getServerContextBaseUrl();
-		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
-		String url = "swf/GeofenceDashboard.swf?domainId="+userbean.getDomainId()+"&languageId="+userbean.getLanguageId()+"&userId="+(com.enterprisehorizons.util.StringUtils.isNull(userbean.getUserId())?"":userbean.getUserId())+"&userUniqueId="+(com.enterprisehorizons.util.StringUtils.isNull(userbean.getUserUniqueId())?"":userbean.getUserUniqueId())+"&moduleId="+moduleId+"&regionPrefix="+getLayerName()+"_DZ"+"&serverUrl="+com.enterprisehorizons.util.URLUtils.encode(serverRootUrl);
-		return url;
-	}   
-	String getMAURL()
-	{
-		long moduleId = RBRegionsUtils.getModuleId(getLayerId());
-		String serverRootUrl = getServerContextBaseUrl();
-		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
-		String url = "serverresources/ManualAlert.swf?domainId="+userbean.getDomainId()+"&languageId="+userbean.getLanguageId()+"&userId="+(com.enterprisehorizons.util.StringUtils.isNull(userbean.getUserId())?"":userbean.getUserId())+"&userUniqueId="+(com.enterprisehorizons.util.StringUtils.isNull(userbean.getUserUniqueId())?"":userbean.getUserUniqueId())+"&moduleId="+moduleId+"&regionPrefix="+getLayerName()+"_MA"+"&serverUrl="+com.enterprisehorizons.util.URLUtils.encode(serverRootUrl);
-		return url;
-	}
-	String getDomainId()
-	{
+}	
+String getDomainId()
+{
 		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
 		return userbean.getDomainId()+"";
-	}
-	String getLanguageId()
-	{ 
+}
+String getLanguageId()
+{ 
 		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
 		return userbean.getLanguageId()+"";
-	}
-	String getUserId()
-	{
+}
+String getUserId()
+{
 		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
 		return (com.enterprisehorizons.util.StringUtils.isNull(userbean.getUserId())?"":userbean.getUserId()) + "";
-	}
-	String getUserUniqueId()
-	{
+}
+String getUserUniqueId()
+{
 		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
 		if(userbean != null) return userbean.getUserUniqueId();
 		return null;
-	}
-	String getModuleId()
-	{	
+}
+String getModuleId()
+{	
 		long moduleId = RBRegionsUtils.getModuleId(getLayerId());
 		return moduleId+"";
-	}
-	String getRegionPrefix()
-	{	
-		return getLayerName()+"_MA";
-	}
-	String getMySQLQry()
-	{
+}
+String getMySQLQry()
+{
 		return com.enterprisehorizons.util.URLUtils.encode("select * from (select (case when received_message != ''  then 'Acknowledged' else 'Not Acknowledged' end) as ack_status, received_message, ack_by,received_on, name as region_name, body as actual_message, send_on from epic_alert_service r1 left outer join STI_C_EMAIL_TEMPLATE em on (em.id = r1.template_Id)) r2 where region_name like '%Staff%'");  
-	}
-	
-	 
-	HttpSession getEcosystemSession( ){
+}	 
+HttpSession getEcosystemSession( ){
 		return getSession().getHttpSession();
-	}
-	
-	String getDescription1(){
+}
+String getDescription1(){
 	  return "The staff layer shows the last known position of staff carrying GPS enabled tracking devices such as digital radios, personal trackers or smartphones running a tracking application. The reported locations (waypoints) are stored in the system for up to 100 days, enabling historical tracking. The staff member details such as the job title, organisation, contact numbers and address are also available.";
-	}
-	
-	String getPointOfContact(){return "FITTEST Location Services";}
-	String getpointOfContactMailId(){return "fittest.locationservices@wfp.org";}
-	String getDataOwner(){ return "Clients utilizing Location Services are responsible for the quality of the data entered into the system, hence for the quality of resulting information"; }  
-	
-	String getLayerCreationDate(){ return "2014-11-11 12:30:00"; } 
-	String getLayerAuthor(){ return "Kaleem MOHAMMED"; } 
-	String getLayerModificationDate(){ return "15 February 2015 12:03:28"; } 
-	String getlayerModificationAuthor(){ return "Navya Somasundar"; } 
-	
-	String getVersion(){ return "version 1.2"; } 
-	String getChangelogLink(){ return "http://rm.globalepic.lu/issues/1371"; } 
-	String getDataSourceAndUpdateFrequencyLDAP(){ return "LDAP- Runs every 4 hours"; } 
-	String getDataSourceAndUpdateFrequencyMiddleware(){ return "Middleware - Runs every 5 minutes"; } 
-	
-	String getMiddlewareDataSourceAndUpdateFrequency(){ return " Vismo - Runs every 10 seconds, TrackMe - Runs every 10 seconds, ETC Reporter - Depends on user settings, SmartPTT - Runs every 2 minutes"; } 
-	String getGeographicalReferenceType(){ return "Vector, point"; } 
-	String getGeographicalRefernceProjectionInformation(){ return "WGS84"; } 
-	
-	String getGroupby(){ return "owner"; }
-	void fireDashboardRefreshEvent()
-	{
+}	
+String getPointOfContact(){return "FITTEST Location Services";}
+String getpointOfContactMailId(){return "fittest.locationservices@wfp.org";}
+String getDataOwner(){ return "Clients utilizing Location Services are responsible for the quality of the data entered into the system, hence for the quality of resulting information"; }  
+
+String getLayerCreationDate(){ return "2014-11-11 12:30:00"; } 
+String getLayerAuthor(){ return "Kaleem MOHAMMED"; } 
+String getLayerModificationDate(){ return "15 February 2015 12:03:28"; } 
+String getlayerModificationAuthor(){ return "Navya Somasundar"; } 
+
+String getVersion(){ return "version 1.2"; } 
+String getChangelogLink(){ return "http://rm.globalepic.lu/issues/1371"; } 
+String getDataSourceAndUpdateFrequencyLDAP(){ return "LDAP- Runs every 4 hours"; } 
+String getDataSourceAndUpdateFrequencyMiddleware(){ return "Middleware - Runs every 5 minutes"; } 	
+String getMiddlewareDataSourceAndUpdateFrequency(){ return " Vismo - Runs every 10 seconds, TrackMe - Runs every 10 seconds, ETC Reporter - Depends on user settings, SmartPTT - Runs every 2 minutes"; } 
+String getGeographicalReferenceType(){ return "Vector, point"; } 
+String getGeographicalRefernceProjectionInformation(){ return "WGS84"; } 	
+String getGroupby(){ return "owner"; }
+void fireDashboardRefreshEvent()
+{
 		SelectUnSelectLayerEvent event = new SelectUnSelectLayerEvent();
 		event.setName("select_layers");
 		event.setLayers("Locations/Airports");
 		fireUserLevelEvent(event);
 		//System.out.println(" event triggered" );
 		fireUserLevelEvent(com.spacetimeinsight.events.EventConstants.REFRESH_DASHBOARDS);	
-	}
-	void fireDynamicDashboardRefreshEvent()
-	{ 
-		fireEvent(com.spacetimeinsight.events.EventConstants.REFRESH_DASHBOARDS);
-	}
-	String parseNumber(String inputString)
-	{
+}
+void fireDynamicDashboardRefreshEvent()
+{ 
+	fireEvent(com.spacetimeinsight.events.EventConstants.REFRESH_DASHBOARDS);
+}
+String parseNumber(String inputString)
+{
 		String str="+";
 		Pattern p = Pattern.compile("-?\\d+");
 		Matcher m = p.matcher(inputString);
 		while (m.find()) { 	  str =str+ m.group(); 	}
 		return str;
-	}
-	String getGroupBy() { return "owner"; } 
-	boolean hasGeofenceAccess()
-	{
+}
+String getGroupBy() { return "owner"; } 
+boolean hasGeofenceAccess()
+{
 		return  false ;/*!(new RBRegionsUtils().hasGeofenceProfile(getUserUniqueId() ) );*/
-	}
-	List<String> getUserMissionList( String userId )
-	{
+}
+List<String> getUserMissionList( String userId )
+{
 		if(userMissionsList==null ) userMissionsList= LDAPUtils.getAllMisisons4rUser( userId );
 		return userMissionsList;
-	}
-	List<String> getUserProfilesList( String userId )
-	{
+}
+List<String> getUserProfilesList( String userId )
+{
 		if(userProfilesList==null ) userProfilesList= LDAPUtils.getAllProfiles4rUser( userId );
 		return userProfilesList;
-	}
-	String getAuthorUrl()
-	{	
+}
+String getAuthorUrl()
+{	
 		return serverRootUrl+"/CustomView.jsp?layername="+getLayerName()+"&Datasource ="+datasource+"&Description="+description+"&Last Refresh Time="+lastRefreshTime;
-	}
-	boolean checkHighStatus()
-	{
-		return isInDangerZone();
-	}
-	boolean isAdmin()
-	{
+}
+boolean checkHighStatus(){ 	return false;/*isInDangerZone();*/ }
+boolean isAdmin()
+{
 	  if( userProfilesList!=null&& userProfilesList.contains("admin") ) return true;
 	  return false;
-	}
-	
-	String alertMsg()
-	{
+}
+String getAlertTime(){  return CommonUtils.getPortalTimeSTIFormat(); }
+String alertMsg()
+{
 		String status = $artefact.getAttributeValueAsString("ccity");
 		String deviceId = $artefact.getAttributeValueAsString("deviceId");
 		String DESCRIPTION = $artefact.getAttributeValueAsString("owner");	
 		return DESCRIPTION+"( "+deviceId+" ) is  CRITICAL ********* ";
-	}
-	String currentVersion(){  return "2.1"; }	
-	String getChangeLog(){  return "Organization, FullName, popup tabs"; }
-	String getDateModified(){  return "2015-04-26 12:30:00"; }
-	String getDatasource(){   	return datasource; }
-	String getLastRefreshTime(){ 	return lastRefreshTime; }
-	String getDescription(){ 	return description; }]]></value>
+}
+String currentVersion(){  return "2.1"; }	
+String getChangeLog(){  return "Organization, FullName, popup tabs"; }
+String getDateModified(){  return "2015-04-26 12:30:00"; }
+String getDatasource(){   	return datasource; }
+String getLastRefreshTime(){ 	return lastRefreshTime; }
+String getDescription(){ 	return description; }
+String getIconUrl(){ return "serverresources/FLS/icons/epic/Tracking_Staff_K.png"; }
+String getIconUrl_G(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_G.png"; }
+String getIconUrl_C(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_C.png"; }
+String getIconUrl_W(){  return "serverresources/FLS/icons/epic/Tracking_Staff_Y.png"; }
+String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.png"; }
+String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png";  }]]></value>
                 <section name="type">
                     <value><![CDATA[1]]></value>
                 </section>

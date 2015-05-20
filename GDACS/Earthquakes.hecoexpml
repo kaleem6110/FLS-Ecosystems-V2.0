@@ -404,7 +404,7 @@ void bindData() {
 		//System.out.println(dat);
 		$artefact.addAttribute("Updated_Date",  CommonUtils.formatDate( dat, "dd/MM/yyyy HH:mm", IEPICConstants.NEW_PORTAL_DATE_FORMAT ) );
 		
-		$artefact.addAttribute("Occured",  getHumanReadable( CommonUtils.parseDate( dat, "dd/MM/yyyy HH:mm" ) ) );
+		$artefact.addAttribute("Occured",  com.wfp.utils.DHLUtils.getHumanReadable( CommonUtils.parseDate( dat, "dd/MM/yyyy HH:mm" ) ) );
 		 
 	}	
 	$artefact.addAttribute("Description", data.getAttributeValue("Description") );	
@@ -507,29 +507,7 @@ String getAuthorUrl(){
 	String getMiddlewareDataSourceAndUpdateFrequency(){ return " Vismo - Runs every 10 seconds, TrackMe - Runs every 10 seconds, ETC Reporter - Depends on user settings, SmartPTT - Runs every 2 minutes"; } 
 	String getGeographicalReferenceType(){ return "Vector, point"; } 
 	String getGeographicalRefernceProjectionInformation(){ return "WGS84"; }
-    //THis should be moved to CommonsUtils.java
-    String getHumanReadable( Date past )
-	{
-		   String humanReadable="a while ago";
-		   Date now = new Date();	
-		   	 
-		   long timeDiff=0L;		   
-		   timeDiff=TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-		   if( timeDiff>=30 )humanReadable= (timeDiff/30)+" month(s) ago";
-		   else if(timeDiff >0 && timeDiff<30 ) humanReadable= timeDiff+" day(s) ago";
-		   else 
-		   {	
-		   	  	timeDiff=TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime());		   	  	
-	   			if( timeDiff >0  ) 	humanReadable= timeDiff+" hours ago";
-	   			else 
-	   			{		   				
-	   				timeDiff=TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime());  
-	   				if( timeDiff >0  ) 	humanReadable= timeDiff+" minutes ago";
-	   				else humanReadable= TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime())+" seconds ago";
-	   			}  			
-		   }	if( timeDiff <0 ) humanReadable="Its a future date"	;   
-		   return humanReadable;
-}
+    
 String getAlertTime()
 {
   return CommonUtils.formatDate( CommonUtils.getUTCdatetimeAsString(),IEPICConstants.NEW_PORTAL_DATE_FORMAT, IEPICConstants.PORTAL_DATE_FORMAT_MM );
