@@ -975,7 +975,7 @@
                                 <value><![CDATA[#0ECCED]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[20]]></value>
+                                <value><![CDATA[30]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Circle]]></value>
@@ -989,7 +989,7 @@
                                 <value><![CDATA[#0ECCED]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[40]]></value>
+                                <value><![CDATA[50]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Circle]]></value>
@@ -1003,7 +1003,7 @@
                                 <value><![CDATA[#0ECCED]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[50]]></value>
+                                <value><![CDATA[60]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Circle]]></value>
@@ -1017,7 +1017,7 @@
                                 <value><![CDATA[#0ECCED]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[60]]></value>
+                                <value><![CDATA[70]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Circle]]></value>
@@ -1031,7 +1031,7 @@
                                 <value><![CDATA[#0ECCED]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[70]]></value>
+                                <value><![CDATA[80]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Circle]]></value>
@@ -1133,6 +1133,7 @@ Map<String, List> safeUnsafeMap = com.wfp.jobs.RestTrackingJob.safeUnsafeMap;
 List<String> criticalUserList =(List<String>) safeUnsafeMap.get("CRITICAL");
 List<String> safeUserList = (List<String>)safeUnsafeMap.get("NORMAL");
 HttpSession session= null;
+
 List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 List<String> userOrgList = null;
 long moduleId = 0L; 
@@ -1342,7 +1343,14 @@ String getStyle()
 		}
 		return "placemarkstyle";
 } 
-boolean isSafe(){ return false; }
+boolean isSafe(){ 
+String uid = $artefact.getAttributeValueAsString("userID");	
+for( String s: safeUserList )
+{
+ if(s.contains(uid) ) return true;
+}
+return false; 
+}
 boolean isInDangerZone()
 {
 	 	boolean isInDanger= false;
@@ -1351,6 +1359,7 @@ boolean isInDangerZone()
 		 {
 		   if( s.contains(uid) ) isInDanger= true;		 
 		 }
+		 if( isSafe() ) return true;
 		//Below code works for STI fences.DONT REMOVE
 		//com.spacetimeinsight.db.model.util.DataModelsCache.getInstance().refresh(LassoTemplate.class.getName());
 		//Coordinate c = new Coordinate( Double.parseDouble( $artefact.getAttributeValueAsString("LatitudeStr") ),
@@ -1456,7 +1465,7 @@ String getAuthorUrl()
 {	
 		return serverRootUrl+"/CustomView.jsp?layername="+getLayerName()+"&Datasource ="+datasource+"&Description="+description+"&Last Refresh Time="+lastRefreshTime;
 }
-boolean checkHighStatus(){ 	return false;/*isInDangerZone();*/ }
+boolean checkHighStatus(){ return isInDangerZone(); }
 boolean isAdmin()
 {
 	  if( userProfilesList!=null&& userProfilesList.contains("admin") ) return true;
@@ -1468,7 +1477,9 @@ String alertMsg()
 		String status = $artefact.getAttributeValueAsString("ccity");
 		String deviceId = $artefact.getAttributeValueAsString("deviceId");
 		String DESCRIPTION = $artefact.getAttributeValueAsString("owner");	
-		return DESCRIPTION+"( "+deviceId+" ) is  CRITICAL ********* ";
+		
+		if( isSafe() ) return DESCRIPTION+"( "+deviceId+" ) is  SAFE ********* ";
+		else return DESCRIPTION+"( "+deviceId+" ) is  CRITICAL ********* ";
 }
 String currentVersion(){  return "2.1"; }	
 String getChangeLog(){  return "Organization, FullName, popup tabs"; }
