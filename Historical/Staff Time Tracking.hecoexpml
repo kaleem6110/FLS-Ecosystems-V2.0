@@ -79,6 +79,22 @@
             </section>
             <section name="row">
                 <section name="column">
+                    <value><![CDATA[Occured]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[java.lang.String]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[Was here]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="column"/>
+                <section name="column"/>
+            </section>
+            <section name="row">
+                <section name="column">
                     <value><![CDATA[owner]]></value>
                 </section>
                 <section name="column">
@@ -136,7 +152,7 @@
                     <value><![CDATA[Latitude]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="column"/>
                 <section name="column"/>
@@ -152,7 +168,7 @@
                     <value><![CDATA[Longitude]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="column"/>
                 <section name="column"/>
@@ -175,13 +191,29 @@
             </section>
             <section name="row">
                 <section name="column">
+                    <value><![CDATA[LatitudeStr]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[java.lang.String]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[Latitude/Longitude]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="column"/>
+                <section name="column"/>
+            </section>
+            <section name="row">
+                <section name="column">
                     <value><![CDATA[QRcode]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[QRcode]]></value>
+                    <value><![CDATA[Location QR Code]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[false]]></value>
@@ -241,6 +273,16 @@
                         </section>
                         <section name="row">
                             <section name="column">
+                                <value><![CDATA[Occured]]></value>
+                            </section>
+                            <section name="column">
+                                <value><![CDATA[Text]]></value>
+                            </section>
+                            <section name="column"/>
+                            <section name="column"/>
+                        </section>
+                        <section name="row">
+                            <section name="column">
                                 <value><![CDATA[time]]></value>
                             </section>
                             <section name="column">
@@ -251,7 +293,7 @@
                         </section>
                         <section name="row">
                             <section name="column">
-                                <value><![CDATA[latitude]]></value>
+                                <value><![CDATA[LatitudeStr]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -261,7 +303,7 @@
                         </section>
                         <section name="row">
                             <section name="column">
-                                <value><![CDATA[longitude]]></value>
+                                <value><![CDATA[QRcode]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -284,16 +326,6 @@
                         <section name="row">
                             <section name="column">
                                 <value><![CDATA[Phone]]></value>
-                            </section>
-                            <section name="column">
-                                <value><![CDATA[Text]]></value>
-                            </section>
-                            <section name="column"/>
-                            <section name="column"/>
-                        </section>
-                        <section name="row">
-                            <section name="column">
-                                <value><![CDATA[QRcode]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -638,8 +670,9 @@ void bindData() {
     				  
     				  
 			//changed for getting type as Date instead of String for time
-			//$artefact.addAttribute("time", com.wfp.utils.CommonUtils.parseDatePortalFormat(data.getTime().replace("T", " ")));		
-			$artefact.addAttribute("time",	(Date) com.wfp.utils.CommonUtils.stringDateToDate(data.getTime().replace("T"," ").replace(".000Z","" ) )  );
+			//$artefact.addAttribute("time", com.wfp.utils.CommonUtils.parseDatePortalFormat(data.getTime().replace("T", " ")));	
+			Date t = (Date) com.wfp.utils.CommonUtils.stringDateToDate(data.getTime().replace("T"," ").replace(".000Z","" ) );	
+			$artefact.addAttribute("time",	t );
 			
 			//$artefact.addAttribute("localTime", com.wfp.utils.CommonUtils.stringDateToDate(data.getDeviceLocalTime()) );		
 			//$artefact.addAttribute("localTimeText", data.getDeviceLocalTime() );   
@@ -651,7 +684,10 @@ void bindData() {
 			$artefact.addAttribute("IM", com.wfp.utils.CommonUtils.getPagerDtls(data.getSkypePager()));
 			$artefact.addAttribute("Mail", com.wfp.utils.CommonUtils.getMailDtls(data.getMail()));
 			$artefact.addAttribute("Phone", com.wfp.utils.CommonUtils.getPhoneDtls(data.getMobilesList()));
+			$artefact.addAttribute("LatitudeStr", cord[1]+" / "+cord[0] );
 			$artefact.addAttribute("QRcode", "QRcode");
+			$artefact.addAttribute("Occured",  com.wfp.utils.DHLUtils.getHumanReadable( t ) );
+		
 		} 
 }
 String getFullName(com.wfp.security.form.DeviceBean data){
@@ -1221,7 +1257,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[300]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1264,6 +1300,27 @@ String getLineColor(){
                         </section>
                         <section name="column">
                             <value><![CDATA[200]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[false]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[None]]></value>
+                        </section>
+                        <section name="column"/>
+                    </section>
+                    <section name="row">
+                        <section name="column">
+                            <value><![CDATA[Occured]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[TextAndHtml]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[100]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
