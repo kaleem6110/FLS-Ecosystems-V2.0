@@ -85,7 +85,7 @@
                     <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[Was here]]></value>
+                    <value><![CDATA[Reported]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[false]]></value>
@@ -704,8 +704,9 @@ String getFullName(com.wfp.security.form.DeviceBean data){
 }
 
 List getData() {
-Object deviceId = getSession().getHttpSession().getAttribute("session_deviceId");
+Object deviceId = getSession().getHttpSession().getAttribute("session_staff_deviceId");
 if( deviceId==null ) deviceId="trackMe-1";
+System.out.println("deviceId"+deviceId);
 return LDAPWSUtils.getUnitHistorical( deviceId.toString(), "staff" ); 
   
 }
@@ -962,7 +963,7 @@ String getLineColor(){
                     <value><![CDATA[600]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[350]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[300]]></value>
@@ -1236,7 +1237,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[200]]></value>
+                            <value><![CDATA[300]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1278,7 +1279,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[200]]></value>
+                            <value><![CDATA[100]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1299,7 +1300,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[200]]></value>
+                            <value><![CDATA[100]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
