@@ -55,6 +55,22 @@
             </section>
             <section name="row">
                 <section name="column">
+                    <value><![CDATA[status]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[java.lang.String]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[Status]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="column"/>
+                <section name="column"/>
+            </section>
+            <section name="row">
+                <section name="column">
                     <value><![CDATA[Organization]]></value>
                 </section>
                 <section name="column">
@@ -1166,7 +1182,13 @@ boolean authorizeDevice()
 	  		}
 	  	}
 	  	return isValid;
-}		 
+}	
+String getUserStatus(String uid )
+{
+ if( isSafe( uid ) )return "SAFE";
+ else if( criticalUserList.contains( uid ) ) return "CRITICAL";
+ else return "OK"; 
+}	 
 void bindData() 
 {
 		try	
@@ -1185,6 +1207,7 @@ void bindData()
 				$artefact.addAttribute("source", data.getName() );	
 				
 				$artefact.addAttribute("owner", getFullName(data));
+				$artefact.addAttribute("status", getUserStatus(data.getUid()) );
 				$artefact.addAttribute("Organization", data.getOrganization());		
 				//$artefact.addAttribute("jpegPhoto", "serverresources/epic/user.png" ); //data.getPhotoString() );
 				if(data.getPhotoString()!=null&&data.getPhotoString()!=""){
@@ -1331,9 +1354,9 @@ String getDeviceCaption()
 		return  $artefact.getAttributeValueAsString("deviceId");
 }
 String getStyle()
-{	
-		if(isInDangerZone()) { System.out.println("critical");return "critical"; }
-		else if( isSafe() ) { System.out.println("safe");return "safe"; }
+{	String uid = $artefact.getAttributeValueAsString("userID");
+		if( criticalUserList.contains( uid) ) { return "critical"; }
+		else if( safeUserList.contains( uid ) ) { return "safe"; }
 		Date time = (Date) $artefact.getAttributeValue("time");	
 		if(time!=null )
 		{
@@ -1345,19 +1368,16 @@ String getStyle()
 		}
 		return "placemarkstyle";
 } 
-boolean isSafe(){  String uid = $artefact.getAttributeValueAsString("userID");	
-	if( uid.equalsIgnoreCase("kaleem.mohammed") ) return true;
+boolean isSafe(String userID ){ 
 
-for( String s: safeUserList )
-{
- if(s.contains(uid) ) return true;
-}
-return false; 
+if( safeUserList.contains( userID ) && (!criticalUserList.contains( userID ) ) ) return true;
+else return false;
 }
 boolean isInDangerZone()
 {
 	 	boolean isInDanger= false;
-		String uid = $artefact.getAttributeValueAsString("userID");		
+		String uid = $artefact.getAttributeValueAsString("userID");	
+		//System.out.println( "criticalUserList"+criticalUserList);	
 		 for( String s: criticalUserList )
 		 {
 		   if( s.contains(uid) ) isInDanger= true;		 
@@ -1372,7 +1392,8 @@ boolean isInDangerZone()
 		//if( userId==null )getSession().getHttpSession().setAttribute("session_userId",getUserUniqueId() );
 		//if( isIndanger )System.out.println(  $artefact.getAttributeValueAsString("LatitudeStr")+":"+templateList.size() +" : "+ lassoList.size() +" isIndager :"+ isIndanger );
 		//return isIndanger;	
-		if( isInDanger )System.out.println( uid +"  in danger ");
+		//if( isInDanger )System.out.println( uid +"  in danger ");
+		if(uid=="") return false;
 		return isInDanger;
 }	
 String getDomainId()
@@ -1401,10 +1422,7 @@ String getModuleId()
 		long moduleId = RBRegionsUtils.getModuleId(getLayerId());
 		return moduleId+"";
 }
-String getMySQLQry()
-{
-		return com.enterprisehorizons.util.URLUtils.encode("select * from (select (case when received_message != ''  then 'Acknowledged' else 'Not Acknowledged' end) as ack_status, received_message, ack_by,received_on, name as region_name, body as actual_message, send_on from epic_alert_service r1 left outer join STI_C_EMAIL_TEMPLATE em on (em.id = r1.template_Id)) r2 where region_name like '%Staff%'");  
-}	 
+ 
 HttpSession getEcosystemSession( ){
 		return getSession().getHttpSession();
 }
@@ -1468,7 +1486,7 @@ String getAuthorUrl()
 {	
 		return serverRootUrl+"/CustomView.jsp?layername="+getLayerName()+"&Datasource ="+datasource+"&Description="+description+"&Last Refresh Time="+lastRefreshTime;
 }
-boolean checkHighStatus(){ return isInDangerZone(); }
+boolean checkHighStatus(){ return false;/* enable this for ticker.isInDangerZone();*/ }
 boolean isAdmin()
 {
 	  if( userProfilesList!=null&& userProfilesList.contains("admin") ) return true;
@@ -1481,7 +1499,7 @@ String alertMsg()
 		String deviceId = $artefact.getAttributeValueAsString("deviceId");
 		String DESCRIPTION = $artefact.getAttributeValueAsString("owner");	
 		
-		if( isSafe() ) return DESCRIPTION+"( "+deviceId+" ) is  SAFE ********* ";
+		if( isSafe( $artefact.getAttributeValueAsString("userID") ) ) return DESCRIPTION+"( "+deviceId+" ) is  SAFE ********* ";
 		else return DESCRIPTION+"( "+deviceId+" ) is  CRITICAL ********* ";
 }
 String currentVersion(){  return "2.1"; }	
@@ -2149,13 +2167,13 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[Arial]]></value>
                 </section>
                 <section name="labelfontsize">
-                    <value><![CDATA[12]]></value>
+                    <value><![CDATA[9]]></value>
                 </section>
                 <section name="labelfontstyle">
                     <value><![CDATA[normal]]></value>
                 </section>
                 <section name="labelfontweight">
-                    <value><![CDATA[normal]]></value>
+                    <value><![CDATA[bold]]></value>
                 </section>
                 <section name="labelfontdecoration">
                     <value><![CDATA[none]]></value>
@@ -2233,7 +2251,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[600]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[425]]></value>
+                    <value><![CDATA[445]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[350]]></value>
@@ -2357,6 +2375,16 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                                 <section name="row">
                                     <section name="column">
                                     <value><![CDATA[owner]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Text]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
+                                    <value><![CDATA[status]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>
@@ -3237,7 +3265,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[150]]></value>
+                            <value><![CDATA[120]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -3279,7 +3307,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[150]]></value>
+                            <value><![CDATA[140]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -3342,7 +3370,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[171]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -3363,7 +3391,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[128]]></value>
+                            <value><![CDATA[118]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -3378,19 +3406,51 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[ptimeLastSeen]]></value>
+                            <value><![CDATA[status]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[120]]></value>
+                            <value><![CDATA[90]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[]]></value>
+                            <section name="columntype">
+                                <value><![CDATA[table]]></value>
+                            </section>
+                            <section name="table">
+                                <section name="row">
+                                    <section name="column">
+                                    <value><![CDATA[Equals]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[CRITICAL]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[#FFFFFF]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[#FF0000]]></value>
+                                    </section>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
+                                    <value><![CDATA[Equals]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[SAFE]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[#FFFFFF]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[#00FF00]]></value>
+                                    </section>
+                                </section>
+                            </section>
                         </section>
                         <section name="column">
                             <value><![CDATA[None]]></value>
@@ -3405,7 +3465,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[150]]></value>
+                            <value><![CDATA[130]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -3415,6 +3475,27 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                         </section>
                         <section name="column">
                             <value><![CDATA[Descending]]></value>
+                        </section>
+                        <section name="column"/>
+                    </section>
+                    <section name="row">
+                        <section name="column">
+                            <value><![CDATA[ptimeLastSeen]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[TextAndHtml]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[110]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[false]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[None]]></value>
                         </section>
                         <section name="column"/>
                     </section>
