@@ -374,6 +374,9 @@
         </section>
         <section name="constraints">
             <section name="constraint">
+                <value><![CDATA[cameraboundary]]></value>
+            </section>
+            <section name="constraint">
                 <value><![CDATA[visibility]]></value>
                 <section name="script">
                     <value><![CDATA[authorizePlaces()]]></value>
@@ -1163,6 +1166,17 @@ String getAuthorUrl(){
                 <section name="filterfields">
                     <section name="row">
                         <section name="column">
+                            <value><![CDATA[mission]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[Text]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[]]></value>
+                        </section>
+                    </section>
+                    <section name="row">
+                        <section name="column">
                             <value><![CDATA[name]]></value>
                         </section>
                         <section name="column">
@@ -1234,22 +1248,13 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[Text]]></value>
                         </section>
-                        <section name="column"/>
-                    </section>
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[country]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[Text]]></value>
-                        </section>
                         <section name="column">
                             <value><![CDATA[]]></value>
                         </section>
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[mobile]]></value>
+                            <value><![CDATA[country]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[Text]]></value>

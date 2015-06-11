@@ -388,6 +388,11 @@
         <section name="blinkloopcount">
             <value><![CDATA[2]]></value>
         </section>
+        <section name="constraints">
+            <section name="constraint">
+                <value><![CDATA[cameraboundary]]></value>
+            </section>
+        </section>
         <section name="listeners"/>
         <section name="layout">
             <section name="folder">
@@ -550,11 +555,17 @@
                     <section name="iconurl">
                         <value><![CDATA[images/dot.png]]></value>
                     </section>
+                    <section name="iconcolor">
+                        <value><![CDATA[#0080FF]]></value>
+                        <section name="transparency">
+                            <value><![CDATA[1.0]]></value>
+                        </section>
+                    </section>
                     <section name="iconwidth">
-                        <value><![CDATA[16]]></value>
+                        <value><![CDATA[12]]></value>
                     </section>
                     <section name="iconheight">
-                        <value><![CDATA[16]]></value>
+                        <value><![CDATA[12]]></value>
                     </section>
                     <section name="isaddline">
                         <value><![CDATA[true]]></value>
@@ -566,7 +577,7 @@
                         <value><![CDATA[solid]]></value>
                     </section>
                     <section name="linecolor">
-                        <value><![CDATA[#0080FF]]></value>
+                        <value><![CDATA[#000000]]></value>
                         <section name="transparency">
                             <value><![CDATA[1.0]]></value>
                         </section>
@@ -584,40 +595,7 @@
                         <value><![CDATA[false]]></value>
                     </section>
                     <section name="isaddlabel">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="labelsymboltype">
-                        <value><![CDATA[esriTS]]></value>
-                    </section>
-                    <section name="labelverticalalignment">
-                        <value><![CDATA[middle]]></value>
-                    </section>
-                    <section name="labelhorizontalalignment">
-                        <value><![CDATA[left]]></value>
-                    </section>
-                    <section name="labelisrighttoleft">
                         <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="labelkerning">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="labelxoffset">
-                        <value><![CDATA[10]]></value>
-                    </section>
-                    <section name="labelfontfamily">
-                        <value><![CDATA[Arial]]></value>
-                    </section>
-                    <section name="labelfontsize">
-                        <value><![CDATA[9]]></value>
-                    </section>
-                    <section name="labelfontstyle">
-                        <value><![CDATA[normal]]></value>
-                    </section>
-                    <section name="labelfontweight">
-                        <value><![CDATA[bold]]></value>
-                    </section>
-                    <section name="labelfontdecoration">
-                        <value><![CDATA[none]]></value>
                     </section>
                 </section>
             </section>
@@ -634,7 +612,13 @@ private com.enterprisehorizons.magma.datamashup.SimpleDataDriver $simplemashupdr
 int lat =24;
 Map<String,String> missionsMap = LDAPUtils.getMissionsMap();
 List<String> userMissionsList = null;
+String offset= null;
 
+String getOffset( String deviceId ){
+ if( offset==null )  offset = com.wfp.jobs.LDAPCacheJob.getDeviceOffsetMap().get( deviceId ); 
+ return offset==null?"0":offset;
+  
+}
 void bindData() {   
 	  
      DeviceBean data= (DeviceBean)$customdatamodel;
@@ -652,7 +636,7 @@ void bindData() {
 			
 	 			$artefact.addAttribute("time", data.getTime() ) ; 
 	 			$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
-	 			$artefact.addAttribute("localTime", data.getDeviceLocalTime() ) ; 
+	 			$artefact.addAttribute("localTime", CommonUtils.getLocalTime( offset ,data.getDeviceLocalTime(),IEPICConstants.NEW_PORTAL_DATE_FORMAT )   ) ; 
 				
 				//Setting Vehicle ID
 				$artefact.addAttribute("vehicleID", data.getCn());
@@ -847,40 +831,7 @@ String getLineColor(){
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="isaddlabel">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
-                </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
-                </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="labelisrighttoleft">
                     <value><![CDATA[false]]></value>
-                </section>
-                <section name="labelkerning">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[5]]></value>
-                </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
-                </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[12]]></value>
-                </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
                 </section>
             </section>
         </section>
@@ -1093,7 +1044,7 @@ String getLineColor(){
                     <value><![CDATA[1100]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[400]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[300]]></value>
@@ -1209,7 +1160,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1232,7 +1183,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1255,30 +1206,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[200]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[false]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[None]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[Center]]></value>
-                        </section>
-                    </section>
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[Occured]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[TextAndHtml]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1301,7 +1229,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[100]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1324,7 +1252,30 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[100]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[false]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[None]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
+                    </section>
+                    <section name="row">
+                        <section name="column">
+                            <value><![CDATA[Occured]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[TextAndHtml]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[100]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1362,32 +1313,21 @@ String getLineColor(){
                             <value><![CDATA[Center]]></value>
                         </section>
                     </section>
+                </section>
+                <section name="groupattributes">
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[localTime]]></value>
+                            <value><![CDATA[vehicleID]]></value>
                         </section>
+                    </section>
+                    <section name="row">
                         <section name="column">
-                            <value><![CDATA[TextAndHtml]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[200]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[false]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[None]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[Center]]></value>
+                            <value><![CDATA[deviceId]]></value>
                         </section>
                     </section>
                 </section>
                 <section name="expandall">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="freezecolumns">
                     <value><![CDATA[1]]></value>

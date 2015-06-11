@@ -703,10 +703,8 @@
             <section name="body">
                 <value><![CDATA[import com.enterprisehorizons.magma.server.util.Cache;
 import com.enterprisehorizons.magma.server.util.ServerUtils;
-import com.wfp.utils.RBRegionsUtils;
 import com.spacetimeinsight.db.model.util.*;
 import com.spacetimeinsight.db.config.model.*;
-import com.spacetimeinsight.rubberbandregions.Rubberbandregions;
 import com.wfp.beans.*;
 import com.wfp.utils.*;
 import javax.servlet.http.HttpSession;
@@ -722,7 +720,7 @@ HttpSession session= null;
 
 public String serverRootUrl = getServerContextBaseUrl();
 List<String> userProfilesList = null;
-Rubberbandregions rubberbandregions = null; 
+
 long moduleId = 0L;
 List<String> userOrgList = null;
 static
@@ -749,27 +747,9 @@ void bindData()
 	{
 	 	com.wfp.security.form.DeviceBean data = (com.wfp.security.form.DeviceBean )$trackingdatamodel;	 	
 	 	if (data != null) 	
-	 	{
-	 			if(session==null)session= getEcosystemSession();
-	 			session.setAttribute("vehicle_description", getDescription1());
-				session.setAttribute("vehicle_pointOfContact", getPointOfContact());
-				session.setAttribute("vehicle_pointOfContactMailId", getpointOfContactMailId());
-				session.setAttribute("vehicle_dataOwner", getDataOwner());
-				session.setAttribute("vehicle_layerCreationDate", getLayerCreationDate());
-				session.setAttribute("vehicle_layerAuthor", getLayerAuthor());
-				session.setAttribute("vehicle_LayerModificationDate", getLayerModificationDate());
-				session.setAttribute("vehicle_LayerModificationAuthor", getlayerModificationAuthor());
-				
-				session.setAttribute("vehicle_version", getVersion());
-				session.setAttribute("vehicle_changelogLink", getChangelogLink());
-				
-				session.setAttribute("vehicle_dataSourceAndUpdateFrequencyLDAP", getDataSourceAndUpdateFrequencyLDAP());
-				session.setAttribute("vehicle_dataSourceAndUpdateFrequencyMiddleware", getDataSourceAndUpdateFrequencyMiddleware());
-				session.setAttribute("vehicle_middlewareDataSourceAndUpdateFrequency", getMiddlewareDataSourceAndUpdateFrequency());
-				session.setAttribute("vehicle_geographicalReferenceType", getGeographicalReferenceType());
-				session.setAttribute("vehicle_geographicalRefernceProjectionInformation", getGeographicalRefernceProjectionInformation());
+	 	{		
 					 		
-	 	  List<String> mList = LDAPUtils.getLDAPUserDtlsMap().get( data.getName() ).getAuthorizedGroupsList();
+	 	  	List<String> mList = LDAPUtils.getLDAPUserDtlsMap().get( data.getName() ).getAuthorizedGroupsList();
 	 		//Setting the Device ID
 	 		$artefact.addAttribute("deviceId", data.getName());
 	 		$artefact.addAttribute("source", data.getName());	
@@ -812,15 +792,7 @@ void bindData()
 			//setting the Organization
 			$artefact.addAttribute("organisation", data.getOrganization() );
 			
-			//$artefact.addAttribute("Contact", com.wfp.utils.CommonUtils.getContactDtls(data.getSkypePager(), data.getMobile(), data.getMail()) );
-			//$artefact.addAttribute("owner", data.getCn() +" "+(com.enterprisehorizons.util.StringUtils.isNull(data.getSn())?"":data.getSn()));
-			//$artefact.addAttribute("Organization", data.getOrganization());
-			//$artefact.addAttribute("callSign", data.getCallSign());
-			//$artefact.addAttribute("Fleet", data.getFleet());
-			//$artefact.addAttribute("Unit", data.getUnit());
-			//$artefact.addAttribute("callSign", data.getCallSign());
-			//$artefact.addAttribute("type", data.getVehicleType());			
-			//$artefact.addAttribute("reg", data.getVehicleReg());
+		
 			$artefact.addAttribute("QRcode", "QRcode");
 			
 			
@@ -873,12 +845,7 @@ String get_Altitude(){
 if( getStyle().equalsIgnoreCase("latestReported") ) return "200";
 else return "100";
 }
-boolean isInDangerZone(){
-	
-	return false;
-}
-
-
+boolean isInDangerZone(){ 	return false; }
 String getUserId(){
 	com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
 	return (com.enterprisehorizons.util.StringUtils.isNull(userbean.getUserId())?"":userbean.getUserId()) + "";
@@ -905,34 +872,6 @@ String getAuthorUrl(){
 HttpSession getEcosystemSession( ){
 		return getSession().getHttpSession();
 	}
-	
-String getDescription1(){
-	 String desc="The vehicle layer shows the last known position of cars carrying GPS enabled tracking devices such as radios, satellite trackers. Information about licence plate, model, vehicle identification number is also available.";
-	 return desc;
-	}
-	String getPointOfContact(){return "FITTEST Location Services";}
-	String getpointOfContactMailId(){return "fittest.locationservices@wfp.org";}
-	String getDataOwner(){ return "Clients utilizing Location Services are responsible for the quality of the data entered into the system, hence for the quality of resulting information"; }  
-	
-	String getLayerCreationDate(){ return "11 November 2014 12:30:00"; } 
-	String getLayerAuthor(){ return "Kaleem MOHAMMED"; } 
-	String getLayerModificationDate(){ return "15 February 2015 12:03:28"; } 
-	String getlayerModificationAuthor(){ return "Navya Somasundar"; } 
-	
-	String getVersion(){ return "version 1.2"; } 
-	String getChangelogLink(){ return "http://rm.globalepic.lu/issues/1372"; } 
-	String getDataSourceAndUpdateFrequencyLDAP(){ return "LDAP- Runs every 4 hours"; } 
-	String getDataSourceAndUpdateFrequencyMiddleware(){ return "Middleware - Runs every 5 minutes"; } 
-	
-	String getMiddlewareDataSourceAndUpdateFrequency(){ return " Novacom - --,  Satamatics - --"; } 
-	String getGeographicalReferenceType(){ return "Vector, point"; } 
-	String getGeographicalRefernceProjectionInformation(){ return "WGS84"; }
-String getDatasource(){   	return datasource; }
-
-String getLastRefreshTime(){ return lastRefreshTime; }
-
-String getDescription(){ 	return description; }
-
 String getMissionFullName(String mission )
 { 
   if( mission==null ) return "-";

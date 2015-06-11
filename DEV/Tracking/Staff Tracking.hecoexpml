@@ -828,7 +828,7 @@
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[180]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Seconds]]></value>
@@ -1171,7 +1171,7 @@ boolean authorizeDevice()
 		String deviceId = $artefact.getAttributeValueAsString("deviceId"); 
 		List<String> deviceMissionList = LDAPUtils.getLDAPUserDtlsMap().get(deviceId).getAuthorizedGroupsList();
 	  	List<String> userMissionList = getUserMissionList( userbean.getUserUniqueId() );  	
-	  	if(  userMissionList!=null && deviceMissionList!=null )
+	  	if( userMissionList!=null && deviceMissionList!=null )
   		{		for(String deviceMission: deviceMissionList   )
 	  			{
 		  		   	 if( userMissionList.contains( deviceMission ) )
@@ -1374,7 +1374,7 @@ if( safeUserList.contains( userID ) && (!criticalUserList.contains( userID ) ) )
 else return false;
 }
 boolean isInDangerZone()
-{
+{ 		//if( 2>1 ) return false;
 	 	boolean isInDanger= false;
 		String uid = $artefact.getAttributeValueAsString("userID");	
 		//System.out.println( "criticalUserList"+criticalUserList);	
@@ -2189,7 +2189,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[120]]></value>
+                    <value><![CDATA[180]]></value>
                 </section>
                 <section name="windowtitle">
                     <section name="script">
@@ -2311,7 +2311,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[120]]></value>
+                    <value><![CDATA[180]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Seconds]]></value>
@@ -2320,7 +2320,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="iscamerasensitive">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="isrefreshonlasso">
                     <value><![CDATA[true]]></value>
@@ -3024,7 +3024,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <value><![CDATA[180]]></value>
                 </section>
                 <section name="windowshowbreadcrumbs">
                     <value><![CDATA[true]]></value>
@@ -3138,7 +3138,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <value><![CDATA[180]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Seconds]]></value>

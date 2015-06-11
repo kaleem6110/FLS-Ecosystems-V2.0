@@ -223,9 +223,6 @@
             </section>
         </section>
         <section name="cache">
-            <value><![CDATA[true]]></value>
-        </section>
-        <section name="isindexed">
             <value><![CDATA[false]]></value>
         </section>
         <section name="isfiltersearchresults">
@@ -402,6 +399,11 @@
         </section>
         <section name="blinkloopcount">
             <value><![CDATA[2]]></value>
+        </section>
+        <section name="constraints">
+            <section name="constraint">
+                <value><![CDATA[cameraboundary]]></value>
+            </section>
         </section>
         <section name="listeners"/>
         <section name="layout">
@@ -594,54 +596,7 @@
                         <value><![CDATA[false]]></value>
                     </section>
                     <section name="isaddlabel">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="labelsymboltype">
-                        <value><![CDATA[esriTS]]></value>
-                    </section>
-                    <section name="labeltext">
-                        <section name="script">
-                            <value><![CDATA[owner]]></value>
-                            <section name="type">
-                                <value><![CDATA[2]]></value>
-                            </section>
-                        </section>
-                    </section>
-                    <section name="labelcolor">
-                        <value><![CDATA[#0080FF]]></value>
-                        <section name="transparency">
-                            <value><![CDATA[1.0]]></value>
-                        </section>
-                    </section>
-                    <section name="labelverticalalignment">
-                        <value><![CDATA[middle]]></value>
-                    </section>
-                    <section name="labelhorizontalalignment">
-                        <value><![CDATA[left]]></value>
-                    </section>
-                    <section name="labelisrighttoleft">
                         <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="labelkerning">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="labelxoffset">
-                        <value><![CDATA[10]]></value>
-                    </section>
-                    <section name="labelfontfamily">
-                        <value><![CDATA[Arial]]></value>
-                    </section>
-                    <section name="labelfontsize">
-                        <value><![CDATA[9]]></value>
-                    </section>
-                    <section name="labelfontstyle">
-                        <value><![CDATA[normal]]></value>
-                    </section>
-                    <section name="labelfontweight">
-                        <value><![CDATA[bold]]></value>
-                    </section>
-                    <section name="labelfontdecoration">
-                        <value><![CDATA[none]]></value>
                     </section>
                 </section>
             </section>
@@ -663,10 +618,12 @@ void bindData() {
 	  
      DeviceBean data= (DeviceBean)$customdatamodel;
    
-    if(data!=null ) { $artefact.setCoordinates(data.getCoordStr());
-    				  String cord[]= data.getCoordStr().split(",");
-    				  $artefact.addAttribute("longitude",cord[0]);
-    				  $artefact.addAttribute("latitude",cord[1]);
+    if(data!=null ) 
+    {
+    		  $artefact.setCoordinates(data.getCoordStr());
+			  String cord[]= data.getCoordStr().split(",");
+			  $artefact.addAttribute("longitude",cord[0]);
+			  $artefact.addAttribute("latitude",cord[1]);
     				  
     				  
 			//changed for getting type as Date instead of String for time
@@ -690,23 +647,22 @@ void bindData() {
 		
 		} 
 }
-String getFullName(com.wfp.security.form.DeviceBean data){
+String getFullName(com.wfp.security.form.DeviceBean data)
+{
 	String fullName = "";
 	if(!com.enterprisehorizons.util.StringUtils.isNull(data.getCn())){
 		fullName = data.getCn()+" ";
-	}
-	
+	}	
 	if(!com.enterprisehorizons.util.StringUtils.isNull(data.getSn())){
 		fullName += data.getSn();
-	}
-	
+	}	
 	return fullName;
 }
 
 List getData() {
 Object deviceId = getSession().getHttpSession().getAttribute("session_staff_deviceId");
 if( deviceId==null ) deviceId="trackMe-1";
-System.out.println("deviceId"+deviceId);
+//System.out.println("deviceId:::::::::"+deviceId);
 return LDAPWSUtils.getUnitHistorical( deviceId.toString(), "staff" ); 
   
 }
