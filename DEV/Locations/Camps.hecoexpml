@@ -489,8 +489,9 @@ void bindData() {
 		
 		$artefact.addAttribute("type", placeType);		
 		if( missionsMap!=null&&dataMap.get("mission")!=null)$artefact.addAttribute("mission", missionsMap.get( dataMap.get("mission").toString() ) );
-		$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
-		
+		// $artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );        
+             $artefact.addAttribute("organisation",  dataMap.get("o")  );        
+           
 		//$artefact.addAttribute("compasId", dataMap.get("compasId"));		
 		//$artefact.addAttribute("skype", dataMap.get("skype"));
 		//$artefact.addAttribute("ocs", dataMap.get("ocs"));		

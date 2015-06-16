@@ -1597,7 +1597,7 @@ return true;
                             <value><![CDATA[STATUS]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -1605,7 +1605,7 @@ return true;
                             <value><![CDATA[COUNTRY]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -1613,7 +1613,7 @@ return true;
                             <value><![CDATA[PLACE_NAME]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -1621,7 +1621,7 @@ return true;
                             <value><![CDATA[ADM2_NAME]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -1629,7 +1629,7 @@ return true;
                             <value><![CDATA[ADM1_NAME]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                 </section>

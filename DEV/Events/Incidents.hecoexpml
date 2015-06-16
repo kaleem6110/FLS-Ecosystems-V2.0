@@ -1637,7 +1637,7 @@ String getAuthorUrl(){
                     <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
                 </section>
                 <section name="windowwidth">
-                    <value><![CDATA[850]]></value>
+                    <value><![CDATA[1100]]></value>
                 </section>
                 <section name="windowheight">
                     <value><![CDATA[250]]></value>
@@ -1646,7 +1646,7 @@ String getAuthorUrl(){
                     <value><![CDATA[300]]></value>
                 </section>
                 <section name="windowleft">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[220]]></value>
                 </section>
                 <section name="hidefrombusinessviewmenu">
                     <value><![CDATA[false]]></value>

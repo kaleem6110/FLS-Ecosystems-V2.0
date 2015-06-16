@@ -1845,7 +1845,7 @@ String getDashboardWBId(){
                     <value><![CDATA[100]]></value>
                 </section>
                 <section name="hidefrombusinessviewmenu">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="allowcopy">
                     <value><![CDATA[true]]></value>

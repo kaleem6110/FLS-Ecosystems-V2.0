@@ -482,20 +482,19 @@ void bindData() {
 		$artefact.addAttribute("type", placeType );
 		
 		String mailStr=dataMap.get("mail").toString();
-		if(mailStr!=null&&mailStr!=""){
-			$artefact.addAttribute("email", dataMap.get("mail"));
-			}
-		else{
-			$artefact.addAttribute("email","-");
-		}
+		if(mailStr!=null&&mailStr!="") 	$artefact.addAttribute("email", dataMap.get("mail"));		
+		else $artefact.addAttribute("email","-");
+		System.out.println("1");
 		String mobileStr=dataMap.get("otherPhones").toString();
-		if(mobileStr!=null&&mobileStr!=""){
+		System.out.println("2");
+		if(mobileStr!=null&&mobileStr!="")
+		{
 			$artefact.addAttribute("mobile", dataMap.get("otherPhones").toString().replace("|"," "));
-			}
+		}
 		else{
 			$artefact.addAttribute("mobile","-");
 		}
-		
+		System.out.println("3");
 		//$artefact.addAttribute("compasId", dataMap.get("compasId"));
 		$artefact.addAttribute("description", dataMap.get("description"));
 		//$artefact.addAttribute("skype", dataMap.get("skype"));
