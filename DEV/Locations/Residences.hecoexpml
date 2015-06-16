@@ -477,7 +477,8 @@ void bindData() {
 		$artefact.addAttribute("displayName", dataMap.get("displayName"));		
 		
 		$artefact.addAttribute("mission", LDAPUtils.getMissionFullName( (String)dataMap.get("mission") ) );
-		$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
+		//$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
+		$artefact.addAttribute("organisation",  dataMap.get("o")  );
 		$artefact.addAttribute("type", placeType );
 		
 		String mailStr=dataMap.get("mail").toString();

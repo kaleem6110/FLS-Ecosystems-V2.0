@@ -527,6 +527,9 @@ String getAlertTime()
         <section name="isadddefaultinfowindow">
             <value><![CDATA[false]]></value>
         </section>
+        <section name="hasoutputfeatures">
+            <value><![CDATA[true]]></value>
+        </section>
         <section name="globalstyle">
             <section name="style">
                 <value><![CDATA[Style5]]></value>

@@ -492,8 +492,9 @@ void bindData() {
 		$artefact.addAttribute("displayName", dataMap.get("displayName"));
 		$artefact.addAttribute("type", placeType);
 		$artefact.addAttribute("mission", LDAPUtils.getMissionFullName( (String)dataMap.get("mission") ) );
-		$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
-	
+			//$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
+		$artefact.addAttribute("organisation",  dataMap.get("o")  );
+		
 		String mailStr=dataMap.get("mail").toString();
 		if(mailStr!=null&&mailStr!="")	$artefact.addAttribute("email", dataMap.get("mail"));
 		else 	$artefact.addAttribute("email","-");
@@ -1853,7 +1854,7 @@ String getDashboardWBId(){
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isattributelink">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="linkattributename">
                     <value><![CDATA[Stock]]></value>
@@ -2233,7 +2234,7 @@ String getDashboardWBId(){
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isattributelink">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="linkattributename">
                     <value><![CDATA[Waybill]]></value>

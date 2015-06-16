@@ -198,7 +198,7 @@
                     <value><![CDATA[Longitude]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="column"/>
                 <section name="column"/>
@@ -470,7 +470,6 @@
             <section name="body">
                 <value><![CDATA[import com.wfp.beans.*;
 import com.wfp.utils.*;
-import javax.servlet.http.HttpSession;
 
 String serverRootUrl = "https://sti-dev.globalepic.lu/SIServer/";
 //ServerUtils.getServerBaseUrl();
@@ -485,12 +484,6 @@ List<String> userPlacesList = null;
 List<String> userProfilesList = null;
 Map<String,String> countriesMap = LDAPUtils.getCountriesMap();
 Map<String,String> missionsMap = LDAPUtils.getMissionsMap();
-HttpSession session= null;
-
-HttpSession getEcosystemSession( ){
-	return getSession().getHttpSession();
-}
-
 
 String getDatasource(){
 	return datasource; 
@@ -509,23 +502,7 @@ void bindData() {
 	
 	if (dataMap != null)
  	{
- 		if(session==null)session= getEcosystemSession();
- 		session.setAttribute("repeaters_description", getDescription1());
-		session.setAttribute("repeaters_pointOfContact", getPointOfContact());
-		session.setAttribute("repeaters_pointOfContactMailId", getpointOfContactMailId());
-		session.setAttribute("repeaters_dataOwner", getDataOwner());
-		session.setAttribute("repeaters_layerCreationDate", getLayerCreationDate());
-		session.setAttribute("repeaters_layerAuthor", getLayerAuthor());
-		session.setAttribute("repeaters_LayerModificationDate", getLayerModificationDate());
-		session.setAttribute("repeaters_LayerModificationAuthor", getlayerModificationAuthor());
-				
-		session.setAttribute("repeaters_version", getVersion());
-		session.setAttribute("repeaters_changelogLink", getChangelogLink());
-				
-		session.setAttribute("repeaters_dataSourceAndUpdateFrequencyLDAP", getDataSourceAndUpdateFrequencyLDAP());
-		
-		session.setAttribute("repeaters_geographicalReferenceType", getGeographicalReferenceType());
-		session.setAttribute("repeaters_geographicalRefernceProjectionInformation", getGeographicalRefernceProjectionInformation());
+ 		
 				
  		String placeType=dataMap.get("placeType").toString().replaceAll(",.*","").replaceAll(".*=","");
  		//System.out.println(" placeType :"+ placeType );
@@ -538,7 +515,8 @@ void bindData() {
 		
 		$artefact.addAttribute("type", placeType);
 		
-		$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
+		//$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
+		$artefact.addAttribute("organisation",  dataMap.get("o") );
 		
 		$artefact.addAttribute("mission", getMissionFullName( dataMap ) );
 		
@@ -1521,7 +1499,7 @@ String getAuthorUrl(){
                     <value><![CDATA[300]]></value>
                 </section>
                 <section name="windowleft">
-                    <value><![CDATA[100]]></value>
+                    <value><![CDATA[220]]></value>
                 </section>
                 <section name="hidefrombusinessviewmenu">
                     <value><![CDATA[false]]></value>
@@ -1631,7 +1609,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1642,7 +1620,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1652,7 +1632,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1663,7 +1643,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1673,7 +1655,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1684,7 +1666,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1694,7 +1678,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1705,7 +1689,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1715,7 +1701,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1726,7 +1712,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1736,7 +1724,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1747,7 +1735,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1757,7 +1747,7 @@ String getAuthorUrl(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[0]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1768,7 +1758,9 @@ String getAuthorUrl(){
                         <section name="column">
                             <value><![CDATA[Ascending]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Center]]></value>
+                        </section>
                     </section>
                 </section>
                 <section name="windowinlinefilters">

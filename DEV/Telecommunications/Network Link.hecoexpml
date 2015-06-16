@@ -231,9 +231,6 @@
         </section>
         <section name="constraints">
             <section name="constraint">
-                <value><![CDATA[cameraboundary]]></value>
-            </section>
-            <section name="constraint">
                 <value><![CDATA[visibility]]></value>
                 <section name="script">
                     <value><![CDATA[authorize()]]></value>
@@ -1523,7 +1520,7 @@ return false;
                             <value><![CDATA[Latitude]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -1531,7 +1528,7 @@ return false;
                             <value><![CDATA[Longitude]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Text]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">

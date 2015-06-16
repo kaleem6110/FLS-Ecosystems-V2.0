@@ -596,7 +596,7 @@ import com.spacetimeinsight.db.config.model.*;
 import com.spacetimeinsight.rubberbandregions.Rubberbandregions;
 import com.wfp.beans.*;
 import com.wfp.utils.*;
-import javax.servlet.http.HttpSession;
+
 
 boolean isStaff = true;
 private com.enterprisehorizons.magma.designtime.artifact.GeoArtifact $artefact;
@@ -607,7 +607,7 @@ String lastRefreshTime = com.enterprisehorizons.util.StringUtils.isNull(com.wfp.
 List<String> userMissionsList = null;
 Map<String, String> deviceOffsetMap = com.wfp.jobs.LDAPCacheJob.getDeviceOffsetMap();
 Map<String,String> missionsMap = LDAPUtils.getMissionsMap();
-HttpSession session= null;
+
 
 public String serverRootUrl = getServerContextBaseUrl();
 List<String> userProfilesList = null;
@@ -650,25 +650,7 @@ void bindData()
 	{
 	 	com.wfp.security.form.DeviceBean data = (com.wfp.security.form.DeviceBean )$trackingdatamodel;	 	
 	 	if (data != null)
-	 	{	 if(session==null)session= getEcosystemSession();
-	 		session.setAttribute("airplane_description", getDescription1());
-			session.setAttribute("airplane_pointOfContact", getPointOfContact());
-			session.setAttribute("airplane_pointOfContactMailId", getpointOfContactMailId());
-			session.setAttribute("airplane_dataOwner", getDataOwner());
-			session.setAttribute("airplane_layerCreationDate", getLayerCreationDate());
-			session.setAttribute("airplane_layerAuthor", getLayerAuthor());
-			session.setAttribute("airplane_LayerModificationDate", getLayerModificationDate());
-			session.setAttribute("airplane_LayerModificationAuthor", getlayerModificationAuthor());
-				
-			session.setAttribute("airplane_version", getVersion());
-			session.setAttribute("airplane_changelogLink", getChangelogLink());
-				
-			session.setAttribute("airplane_dataSourceAndUpdateFrequencyLDAP", getDataSourceAndUpdateFrequencyLDAP());
-			session.setAttribute("airplane_dataSourceAndUpdateFrequencyMiddleware", getDataSourceAndUpdateFrequencyMiddleware());
-			session.setAttribute("airplane_middlewareDataSourceAndUpdateFrequency", getMiddlewareDataSourceAndUpdateFrequency());
-			session.setAttribute("airplane_geographicalReferenceType", getGeographicalReferenceType());
-			session.setAttribute("airplane_geographicalRefernceProjectionInformation", getGeographicalRefernceProjectionInformation());
-					 				
+	 	{	 					 				
 	 		List<String> mList = LDAPUtils.getLDAPUserDtlsMap().get( data.getName() ).getAuthorizedGroupsList();
 	 		if( mList!=null & mList.size()==0 ) mList.add("AE");
 	 		
@@ -863,9 +845,7 @@ String getLastRefreshTime(){ 	return lastRefreshTime; }
 
 String getDescription(){ 	return description; }
 
-HttpSession getEcosystemSession( ){
-		return getSession().getHttpSession();
-	}
+
 	
 	String getDescription1(){
 	 return "The airplane layer shows the last known position of the United Nations Humanitarian Air Service fleet.";

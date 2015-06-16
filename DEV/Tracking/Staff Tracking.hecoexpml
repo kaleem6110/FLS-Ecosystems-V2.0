@@ -435,6 +435,22 @@
             </section>
             <section name="row">
                 <section name="column">
+                    <value><![CDATA[Work]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[java.lang.String]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[Work Phone]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="column"/>
+                <section name="column"/>
+            </section>
+            <section name="row">
+                <section name="column">
                     <value><![CDATA[Foodsat]]></value>
                 </section>
                 <section name="column">
@@ -948,6 +964,14 @@
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.PlacemarkFeature]]></value>
                 </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[userID]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
                 <section name="isruntimeaccessible">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1132,7 +1156,6 @@ import com.spacetimeinsight.events.SelectUnSelectLayerEvent;
 import com.enterprisehorizons.magma.models.util.Coordinate;
 import com.wfp.db.platform.model.LassoTemplate;
 import com.spacetimeinsight.db.lasso.model.Lasso;
-import javax.servlet.http.HttpSession;
 
 private com.enterprisehorizons.magma.designtime.artifact.GeoArtifact $artefact;
 private com.wfp.custom.datasource.CustomWebServiceDataDriver $trackingdriver;
@@ -1148,7 +1171,6 @@ List<Lasso> lassoList = LassoUtils.getAllLassos();
 Map<String, List> safeUnsafeMap = com.wfp.jobs.RestTrackingJob.safeUnsafeMap;
 List<String> criticalUserList =(List<String>) safeUnsafeMap.get("CRITICAL");
 List<String> safeUserList = (List<String>)safeUnsafeMap.get("NORMAL");
-HttpSession session= null;
 
 List<LassoTemplate> templateList = LassoUtils.getAllLassoTemplates();
 List<String> userOrgList = null;
@@ -1169,7 +1191,7 @@ boolean authorizeDevice()
 			if(userProfilesList ==null ) userProfilesList = com.wfp.utils.LDAPUtils.getUserProfilesList( userbean.getUserUniqueId());	
 		}catch(Exception e){ }	
 		String deviceId = $artefact.getAttributeValueAsString("deviceId"); 
-		List<String> deviceMissionList = LDAPUtils.getLDAPUserDtlsMap().get(deviceId).getAuthorizedGroupsList();
+		List<String> deviceMissionList = LDAPUtils.getLDAPUserDtlsMap().get( deviceId ).getAuthorizedGroupsList();
 	  	List<String> userMissionList = getUserMissionList( userbean.getUserUniqueId() );  	
 	  	if( userMissionList!=null && deviceMissionList!=null )
   		{		for(String deviceMission: deviceMissionList   )
@@ -1235,21 +1257,26 @@ void bindData()
 					$artefact.addAttribute("PLUSPhones",  "-" );
 					if(pp.indexOf("Mobile")>=0 ) $artefact.addAttribute("Mobile",CommonUtils.getPhoneNumber(data.getMobilesList(),"Mobile").replace("|",""));
 					if(pp.indexOf("Foodsat")>=0 ) $artefact.addAttribute("Foodsat",CommonUtils.getPhoneNumber(data.getMobilesList(),"Foodsat").replace("|",""));
-					if(pp.indexOf("CELL")>=0 ) $artefact.addAttribute("Cell", CommonUtils.getPhoneNumber(data.getMobilesList(),"CELL").replace("|",""));
+					if(pp.indexOf("CELL")>=0 )
+					{
+						String scell = CommonUtils.getPhoneNumber(data.getMobilesList(),"CELL").replace("|","");
+						if( scell.trim()!="") $artefact.addAttribute("Cell", scell);
+					}
+					if(pp.indexOf("WORK")>=0 ) $artefact.addAttribute("Work", CommonUtils.getPhoneNumber(data.getMobilesList(),"WORK").replace("|",""));
 					
-				} 
+				}  
 				$artefact.addAttribute("PLUSLast_Reported",  "-" );
 				Date t = CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT );
 			 	$artefact.addAttribute("time", t  );	
 			 	$artefact.addAttribute("ptime", data.getTime()  );
-			 	$artefact.addAttribute("ptimeLastSeen", data.getTime()  );
+			 	$artefact.addAttribute("ptimeLastSeen", data.getTime() );//com.wfp.utils.DHLUtils.getHumanReadable( t )  );
 			 	$artefact.addAttribute("pLocalTime", data.getDeviceLocalTime()  );	
 			    $artefact.addAttribute("localTime", CommonUtils.stringDateToDate(data.getDeviceLocalTime()) );		    
 			 	$artefact.addAttribute("Latitude", data.getLatitude()+" / "+data.getLongitude());
 			 	$artefact.addAttribute("LatitudeStr", data.getLatitude() );
 			 	$artefact.addAttribute("LongitudeStr", data.getLongitude() );
-			 	$artefact.addAttribute("Longitude", data.getLongitude());
-			  	$artefact.addAttribute("Lastseen",  data.getTime());	
+			 	$artefact.addAttribute("Longitude", data.getLongitude()); 
+			  	$artefact.addAttribute("Lastseen",  data.getTime() );	
 			  		 	
 			 	$artefact.addAttribute("PLUSHistorical", "images/dashboards/duvaltriangle.png" );
 			 	$artefact.addAttribute("firstReported",  data.getFirstReported());
@@ -1302,7 +1329,7 @@ void bindData()
 				if(BBpin!=null)
 				{
 					BBpin = BBpin.replace("BBpin:","").replace("|","");
-					$artefact.addAttribute("BBpin", BBpin);
+					if(BBpin.trim()!="")$artefact.addAttribute("BBpin", BBpin);
 				}
 				$artefact.addAttribute("QRcode", "QRcode");
 				$artefact.addAttribute("vCard", "vCard");			
@@ -1423,9 +1450,7 @@ String getModuleId()
 		return moduleId+"";
 }
  
-HttpSession getEcosystemSession( ){
-		return getSession().getHttpSession();
-}
+
 String getDescription1(){
 	  return "The staff layer shows the last known position of staff carrying GPS enabled tracking devices such as digital radios, personal trackers or smartphones running a tracking application. The reported locations (waypoints) are stored in the system for up to 100 days, enabling historical tracking. The staff member details such as the job title, organisation, contact numbers and address are also available.";
 }	
@@ -1576,6 +1601,9 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
         </section>
         <section name="isadddefaultinfowindow">
             <value><![CDATA[false]]></value>
+        </section>
+        <section name="hasoutputfeatures">
+            <value><![CDATA[true]]></value>
         </section>
         <section name="globalstyle">
             <section name="style">
@@ -2259,12 +2287,6 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="windowleft">
                     <value><![CDATA[200]]></value>
                 </section>
-                <section name="actionevents">
-                    <section name="row">
-                        <section name="column"/>
-                        <section name="column"/>
-                    </section>
-                </section>
                 <section name="isinfowindow">
                     <value><![CDATA[true]]></value>
                 </section>
@@ -2679,6 +2701,16 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                                 <section name="row">
                                     <section name="column">
                                     <value><![CDATA[Cell]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Text]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
+                                    <value><![CDATA[Work]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>
@@ -3612,7 +3644,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[225]]></value>
                 </section>
                 <section name="hidefrombusinessviewmenu">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="allowcopy">
                     <value><![CDATA[true]]></value>

@@ -480,8 +480,9 @@ void bindData() {
 		
 		$artefact.addAttribute("mission", LDAPUtils.getMissionFullName( (String)dataMap.get("mission") ) );
 		$artefact.addAttribute("type", placeType.toUpperCase() );
-		$artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );
-		
+		// $artefact.addAttribute("organisation", LDAPUtils.getOrgMap().get( dataMap.get("o") )  );        
+             $artefact.addAttribute("organisation",  dataMap.get("o")  );        
+           
 		String mailStr=dataMap.get("mail").toString();				
 		if(mailStr!=null&&mailStr!=""){
 			$artefact.addAttribute("email", dataMap.get("mail"));

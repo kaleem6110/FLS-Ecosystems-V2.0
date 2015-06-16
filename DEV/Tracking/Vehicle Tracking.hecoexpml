@@ -707,7 +707,7 @@ import com.spacetimeinsight.db.model.util.*;
 import com.spacetimeinsight.db.config.model.*;
 import com.wfp.beans.*;
 import com.wfp.utils.*;
-import javax.servlet.http.HttpSession;
+
 
 private com.enterprisehorizons.magma.designtime.artifact.GeoArtifact $artefact;
 private com.wfp.custom.datasource.CustomWebServiceDataDriver $trackingdriver;
@@ -716,7 +716,7 @@ String datasource = "Hitec middleware REST service & LDAP ";
 String lastRefreshTime = com.enterprisehorizons.util.StringUtils.isNull(com.wfp.jobs.RestTrackingJob.getInstance().getLastRefreshTime())?"Job not refreshed":com.wfp.jobs.RestTrackingJob.getInstance().getLastRefreshTime() ;
 Map<String, String> deviceOffsetMap = com.wfp.jobs.LDAPCacheJob.getDeviceOffsetMap();
 Map<String,String> missionsMap = LDAPUtils.getMissionsMap();
-HttpSession session= null;
+
 
 public String serverRootUrl = getServerContextBaseUrl();
 List<String> userProfilesList = null;
@@ -869,9 +869,7 @@ String getAuthorUrl(){
 	datasource = datasource+".<br> All <i>EMS</i> devices are identified as Vehicles";
 	return serverRootUrl+"/CustomView.jsp?layername="+getLayerName()+"&Datasource ="+datasource+"&Description="+description+"&Last Refresh Time="+lastRefreshTime;
 }
-HttpSession getEcosystemSession( ){
-		return getSession().getHttpSession();
-	}
+
 String getMissionFullName(String mission )
 { 
   if( mission==null ) return "-";
