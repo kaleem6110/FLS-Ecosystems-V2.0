@@ -411,6 +411,14 @@
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.PlacemarkFeature]]></value>
                 </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[name]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
                 <section name="isruntimeaccessible">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -602,6 +610,54 @@ String getAuthorUrl(){
                 <value><![CDATA[placemarkstyle]]></value>
                 <section name="name">
                     <value><![CDATA[placemarkstyle]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <value><![CDATA[serverresources/FLS/icons/epic/Residence.png]]></value>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
+                <section name="iconscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <value><![CDATA[serverresources/FLS/icons/epic/Residence.png]]></value>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[placemarkstyleesri]]></value>
+                <section name="name">
+                    <value><![CDATA[placemarkstyleesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>

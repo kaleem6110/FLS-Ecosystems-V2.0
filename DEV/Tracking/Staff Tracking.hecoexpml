@@ -857,10 +857,10 @@
                 </section>
                 <section name="refreshonevents"/>
                 <section name="isrefreshonlasso">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="allowlassofilteringoverride">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="featuretype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.HTMLSimpleFeature]]></value>
@@ -1012,7 +1012,7 @@
                                 <value><![CDATA[10]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[#0ECCED]]></value>
+                                <value><![CDATA[#0080FF]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[30]]></value>
@@ -1026,7 +1026,7 @@
                                 <value><![CDATA[50]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[#0ECCED]]></value>
+                                <value><![CDATA[#0080FF]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[50]]></value>
@@ -1040,21 +1040,7 @@
                                 <value><![CDATA[100]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[#0ECCED]]></value>
-                            </section>
-                            <section name="column">
-                                <value><![CDATA[60]]></value>
-                            </section>
-                            <section name="column">
-                                <value><![CDATA[Circle]]></value>
-                            </section>
-                        </section>
-                        <section name="row">
-                            <section name="column">
-                                <value><![CDATA[200]]></value>
-                            </section>
-                            <section name="column">
-                                <value><![CDATA[#0ECCED]]></value>
+                                <value><![CDATA[#0080FF]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[70]]></value>
@@ -1065,10 +1051,10 @@
                         </section>
                         <section name="row">
                             <section name="column">
-                                <value><![CDATA[500]]></value>
+                                <value><![CDATA[10000]]></value>
                             </section>
                             <section name="column">
-                                <value><![CDATA[#0ECCED]]></value>
+                                <value><![CDATA[#0080FF]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[80]]></value>
@@ -1231,8 +1217,10 @@ void bindData()
 				$artefact.addAttribute("owner", getFullName(data));
 				$artefact.addAttribute("status", getUserStatus(data.getUid()) );
 				$artefact.addAttribute("Organization", data.getOrganization());		
-				//$artefact.addAttribute("jpegPhoto", "serverresources/epic/user.png" ); //data.getPhotoString() );
-				if(data.getPhotoString()!=null&&data.getPhotoString()!=""){
+				
+				if(data.getPhotoString()!=null&&data.getPhotoString().trim()!="")
+				{
+					 System.out.println("data.getPhotoString()"+data.getPhotoString());
 					$artefact.addAttribute("jpegPhoto","data:image/png;base64,"+data.getPhotoString() );
 				}
 							
@@ -1381,7 +1369,7 @@ String getDeviceCaption()
 		return  $artefact.getAttributeValueAsString("deviceId");
 }
 String getStyle()
-{	String uid = $artefact.getAttributeValueAsString("userID");
+{		String uid = $artefact.getAttributeValueAsString("userID");
 		if( criticalUserList.contains( uid) ) { return "critical"; }
 		else if( safeUserList.contains( uid ) ) { return "safe"; }
 		Date time = (Date) $artefact.getAttributeValue("time");	
@@ -1389,7 +1377,7 @@ String getStyle()
 		{
 			Date current = Calendar.getInstance().getTime();
 			int hrs = (int)((current.getTime()-time.getTime())/(1000 * 60 * 60 ) );
-			if( hrs <6  ) return "latestReported";
+			if( hrs <6  ) return "latestReported"; 
 			else if(hrs <24 ) return "lastDayReported";	
 			else if(hrs>23&&hrs <120 ) return "lastWeekReported";		
 		}
@@ -1758,6 +1746,55 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="name">
                     <value><![CDATA[lastDayReported]]></value>
                 </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_C()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_C()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[lastDayReportedesri]]></value>
+                <section name="name">
+                    <value><![CDATA[lastDayReportedesri]]></value>
+                </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
                 </section>
@@ -1840,6 +1877,44 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <value><![CDATA[lastWeekReported]]></value>
                 <section name="name">
                     <value><![CDATA[lastWeekReported]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_W()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[lastWeekReportedesri]]></value>
+                <section name="name">
+                    <value><![CDATA[lastWeekReportedesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
@@ -1924,6 +1999,55 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="name">
                     <value><![CDATA[latestReported]]></value>
                 </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[latestReportedesri]]></value>
+                <section name="name">
+                    <value><![CDATA[latestReportedesri]]></value>
+                </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
                 </section>
@@ -2006,6 +2130,64 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <value><![CDATA[placemarkstyle]]></value>
                 <section name="name">
                     <value><![CDATA[placemarkstyle]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="balloontext">
+                    <value><![CDATA[Hello]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="highlightlabelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[placemarkstyleesri]]></value>
+                <section name="name">
+                    <value><![CDATA[placemarkstyleesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>

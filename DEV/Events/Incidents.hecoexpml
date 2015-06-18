@@ -362,10 +362,23 @@
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="label">
-                    <value><![CDATA[Placemark]]></value>
+                    <section name="script">
+                        <value><![CDATA[getName()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.PlacemarkFeature]]></value>
+                </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[Title]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="isruntimeaccessible">
                     <value><![CDATA[false]]></value>
@@ -578,84 +591,44 @@ String getAuthorUrl(){
         </section>
         <section name="globalstyle">
             <section name="style">
-                <value><![CDATA[Style5]]></value>
-                <section name="name">
-                    <value><![CDATA[Style5]]></value>
-                </section>
-                <section name="viewertype">
-                    <value><![CDATA[Esri]]></value>
-                </section>
-                <section name="isaddaslayer">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="makeasglobalstyle">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isaddsymbol">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddicon">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="iconsymboltype">
-                    <value><![CDATA[esriPMS]]></value>
-                </section>
-                <section name="iconurl">
-                    <value><![CDATA[serverresources/icons/epic/Incidents.png]]></value>
-                </section>
-                <section name="iconwidth">
-                    <value><![CDATA[16]]></value>
-                </section>
-                <section name="iconheight">
-                    <value><![CDATA[16]]></value>
-                </section>
-                <section name="isaddline">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddfill">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddlabel">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
-                </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
-                </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="labelisrighttoleft">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="labelkerning">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[10]]></value>
-                </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
-                </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[8]]></value>
-                </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
-                </section>
-            </section>
-            <section name="style">
                 <value><![CDATA[lastDayReported]]></value>
                 <section name="name">
                     <value><![CDATA[lastDayReported]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_C()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[lastDayReportedesri]]></value>
+                <section name="name">
+                    <value><![CDATA[lastDayReportedesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
@@ -696,46 +669,48 @@ String getAuthorUrl(){
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="isaddlabel">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
-                </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
-                </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="labelisrighttoleft">
                     <value><![CDATA[false]]></value>
-                </section>
-                <section name="labelkerning">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[10]]></value>
-                </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
-                </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[9]]></value>
-                </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[bold]]></value>
-                </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
                 </section>
             </section>
             <section name="style">
                 <value><![CDATA[lastWeekReported]]></value>
                 <section name="name">
                     <value><![CDATA[lastWeekReported]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_Y()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[lastWeekReportedesri]]></value>
+                <section name="name">
+                    <value><![CDATA[lastWeekReportedesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
@@ -776,46 +751,48 @@ String getAuthorUrl(){
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="isaddlabel">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
-                </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
-                </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="labelisrighttoleft">
                     <value><![CDATA[false]]></value>
-                </section>
-                <section name="labelkerning">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[10]]></value>
-                </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
-                </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[9]]></value>
-                </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[bold]]></value>
-                </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
                 </section>
             </section>
             <section name="style">
                 <value><![CDATA[latestReported]]></value>
                 <section name="name">
                     <value><![CDATA[latestReported]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[latestReportedesri]]></value>
+                <section name="name">
+                    <value><![CDATA[latestReportedesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
@@ -856,46 +833,68 @@ String getAuthorUrl(){
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="isaddlabel">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
-                </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
-                </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="labelisrighttoleft">
                     <value><![CDATA[false]]></value>
-                </section>
-                <section name="labelkerning">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[10]]></value>
-                </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
-                </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[9]]></value>
-                </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[bold]]></value>
-                </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
                 </section>
             </section>
             <section name="style">
                 <value><![CDATA[placemarkstyle]]></value>
                 <section name="name">
                     <value><![CDATA[placemarkstyle]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="balloontext">
+                    <value><![CDATA[Hello]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[placemarkstyleesri]]></value>
+                <section name="name">
+                    <value><![CDATA[placemarkstyleesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
@@ -936,40 +935,7 @@ String getAuthorUrl(){
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="isaddlabel">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
-                </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
-                </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="labelisrighttoleft">
                     <value><![CDATA[false]]></value>
-                </section>
-                <section name="labelkerning">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[10]]></value>
-                </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
-                </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[9]]></value>
-                </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
-                </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[bold]]></value>
-                </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
                 </section>
             </section>
         </section>
