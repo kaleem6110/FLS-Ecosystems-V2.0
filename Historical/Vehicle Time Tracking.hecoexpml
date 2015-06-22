@@ -408,6 +408,14 @@
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.LineStringFeature]]></value>
                 </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[getLabelName()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
                 <section name="extrude">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -415,7 +423,7 @@
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="placemarklocation">
-                    <value><![CDATA[everypoint]]></value>
+                    <value><![CDATA[startend]]></value>
                 </section>
                 <section name="isblink">
                     <value><![CDATA[false]]></value>
@@ -430,7 +438,7 @@
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="placemarklocation">
-                    <value><![CDATA[everypoint]]></value>
+                    <value><![CDATA[startend]]></value>
                 </section>
                 <section name="generatelegend">
                     <value><![CDATA[false]]></value>
@@ -459,12 +467,7 @@
                         </section>
                     </section>
                     <section name="iconcolor">
-                        <section name="script">
-                            <value><![CDATA[getLineColor()]]></value>
-                            <section name="type">
-                                <value><![CDATA[1]]></value>
-                            </section>
-                        </section>
+                        <value><![CDATA[#0080FF]]></value>
                         <section name="transparency">
                             <value><![CDATA[1.0]]></value>
                         </section>
@@ -483,7 +486,7 @@
                     </section>
                     <section name="linecolor">
                         <section name="script">
-                            <value><![CDATA[getLineColor()]]></value>
+                            <value><![CDATA[getLColor()]]></value>
                             <section name="type">
                                 <value><![CDATA[1]]></value>
                             </section>
@@ -502,12 +505,7 @@
                         <value><![CDATA[true]]></value>
                     </section>
                     <section name="highlighticonurl">
-                        <section name="script">
-                            <value><![CDATA[getIconUrl()]]></value>
-                            <section name="type">
-                                <value><![CDATA[1]]></value>
-                            </section>
-                        </section>
+                        <value><![CDATA[serverresources/FLS/icons/epic/Tracking_Vehicle_G.png]]></value>
                     </section>
                     <section name="highlighticonscale">
                         <value><![CDATA[1.0]]></value>
@@ -597,10 +595,9 @@
         </section>
         <section name="scriptor">
             <section name="body">
-                <value><![CDATA[import java.util.List;
-import com.wfp.utils.*;
+                <value><![CDATA[import com.wfp.utils.*;
 import com.wfp.security.form.DeviceBean;
-
+import java.util.*;
 private com.enterprisehorizons.magma.designtime.artifact.GeoArtifact $artefact;
 private com.enterprisehorizons.magma.datamashup.ScriptableDataDriver $customdriver;
 private com.enterprisehorizons.magma.datamashup.SimpleDataDriver $simplemashupdriver;
@@ -642,24 +639,23 @@ void bindData() {
     				  
 	} 
 }
-String getFullName(com.wfp.security.form.DeviceBean data){
+String getFullName(com.wfp.security.form.DeviceBean data)
+{
 	String fullName = "";
 	if(!com.enterprisehorizons.util.StringUtils.isNull(data.getCn())){
 		fullName = data.getCn()+" ";
-	}
-	
+	}	
 	if(!com.enterprisehorizons.util.StringUtils.isNull(data.getSn())){
 		fullName += data.getSn();
-	}
-	
+	}	
 	return fullName;
 }
 
-List getData() {
-Object deviceId = getSession().getHttpSession().getAttribute("session_vehicle_deviceId");
-if( deviceId==null ) deviceId="EMS-DST6E66BF";
-return LDAPWSUtils.getUnitHistorical( deviceId.toString(), "vehicle" ); 
-  
+List getData() 
+{
+	Object deviceId = getSession().getHttpSession().getAttribute("session_vehicle_deviceId");
+	if( deviceId==null ) deviceId="EMS-DST6E66BF";
+	return LDAPWSUtils.getUnitHistorical( deviceId.toString(), "vehicle" );  
 }
 
 List<String> getUserMissionList( String userId )
@@ -670,7 +666,8 @@ List<String> getUserMissionList( String userId )
 	} //System.out.println("userMissionsList"+ userMissionsList );
 	return userMissionsList;
 }
-String getNameStyle() {
+String getNameStyle() 
+{
     if("Meter1".equalsIgnoreCase($artefact.getAttributeValueAsString("Meter1")))
 	return "EsriStyle1";
 	else
@@ -679,9 +676,9 @@ String getNameStyle() {
 }
 
 String getName() { 	return $artefact.getAttributeValueAsString("vehicleID"); }
-String getLabelName() { 	return getName()+" ( "+$artefact.getAttributeValueAsString("Occured")+" )"; }
-boolean authorize(){
-
+String getLabelName() { 	return getName()+" ( "+$artefact.getAttributeValueAsString("time")+" )"; }
+boolean authorize()
+{
 String type = $artefact.getAttributeValueAsString("Name");
 if( type!=""&& type.equalsIgnoreCase("trackMe-7") ) return true;
 return false;
@@ -690,10 +687,23 @@ String getIconUrl(){
 	return "serverresources/icons/epic/Tracking_Vehicle_G.png";
 }
 
-String getIconColor(){
-	return "#00FF00";
-}
+String getIconColor(){ 	return "#00FF00"; }
+String getLColor()
+{	
+	Date t = com.wfp.utils.CommonUtils.parseDate( $artefact.getAttributeValueAsString("time"), IEPICConstants.NEW_PORTAL_DATE_FORMAT );	
+	if(t!=null )
+		{
+			Date current = Calendar.getInstance().getTime();
+			int hrs = (int)((current.getTime()-t.getTime())/(1000 * 60 * 60 ) );
+			if( hrs <6  )  return "#00FF00";
+			else if(hrs <24 ) return "#00FFFF";
+			else if(hrs>23&&hrs <120 ) return "#FFFF00";		
+		}
+	
+ return "#000000";
 
+}		
+ 
 String getLineColor(){
 	try{
 	com.wfp.security.form.DeviceBean data = (com.wfp.security.form.DeviceBean)$customdatamodel;

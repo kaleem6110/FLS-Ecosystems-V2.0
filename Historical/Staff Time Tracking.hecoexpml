@@ -400,11 +400,6 @@
         <section name="blinkloopcount">
             <value><![CDATA[2]]></value>
         </section>
-        <section name="constraints">
-            <section name="constraint">
-                <value><![CDATA[cameraboundary]]></value>
-            </section>
-        </section>
         <section name="listeners"/>
         <section name="layout">
             <section name="folder">
@@ -499,7 +494,12 @@
                         <value><![CDATA[0.0]]></value>
                     </section>
                     <section name="linecolor">
-                        <value><![CDATA[#0080FF]]></value>
+                        <section name="script">
+                            <value><![CDATA[getLColor()]]></value>
+                            <section name="type">
+                                <value><![CDATA[1]]></value>
+                            </section>
+                        </section>
                     </section>
                     <section name="linecolorshader">
                         <value><![CDATA[false]]></value>
@@ -698,7 +698,21 @@ String getIconUrl(){
 String getIconColor(){
 	return "#00FF00";
 }
+String getLColor()
+{	
+	Date t = (Date) $artefact.getAttributeValue("time");	
+	if(t!=null )
+		{
+			Date current = Calendar.getInstance().getTime();
+			int hrs = (int)((current.getTime()-t.getTime())/(1000 * 60 * 60 ) );
+			if( hrs <6  )  return "#00FF00";
+			else if(hrs <24 ) return "#00FFFF";
+			else if(hrs>23&&hrs <120 ) return "#FFFF00";		
+		}
+	
+ return "#000000";
 
+}		
 String getLineColor(){
 	try{
 	com.wfp.security.form.DeviceBean data = (com.wfp.security.form.DeviceBean)$customdatamodel;
