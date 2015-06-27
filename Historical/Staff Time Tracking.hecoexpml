@@ -364,7 +364,7 @@
                     <value><![CDATA[com.enterprisehorizons.magma.models.HTMLSimpleFeature]]></value>
                 </section>
                 <section name="autozoom">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="params">
                     <section name="param">
@@ -405,7 +405,7 @@
             <section name="folder">
                 <section name="name">
                     <section name="script">
-                        <value><![CDATA[name]]></value>
+                        <value><![CDATA[time]]></value>
                         <section name="type">
                             <value><![CDATA[2]]></value>
                         </section>
@@ -415,16 +415,37 @@
                     <value><![CDATA[json]]></value>
                 </section>
                 <section name="label">
-                    <value><![CDATA[LineString]]></value>
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.LineStringFeature]]></value>
+                </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="extrude">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="tessellate">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="globalstyleid">
+                    <section name="script">
+                        <value><![CDATA[getStyle()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="placemarklocation">
                     <value><![CDATA[everypoint]]></value>
@@ -443,161 +464,6 @@
                 </section>
                 <section name="placemarklocation">
                     <value><![CDATA[everypoint]]></value>
-                </section>
-                <section name="generatelegend">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="legendname">
-                    <value><![CDATA[Legend]]></value>
-                </section>
-                <section name="style">
-                    <section name="name">
-                        <section name="script">
-                            <value><![CDATA[owner]]></value>
-                            <section name="type">
-                                <value><![CDATA[2]]></value>
-                            </section>
-                        </section>
-                    </section>
-                    <section name="makeasglobalstyle">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="iconurl">
-                        <section name="script">
-                            <value><![CDATA[getIconUrl()]]></value>
-                            <section name="type">
-                                <value><![CDATA[1]]></value>
-                            </section>
-                        </section>
-                    </section>
-                    <section name="iconcolor">
-                        <section name="script">
-                            <value><![CDATA[getLineColor()]]></value>
-                            <section name="type">
-                                <value><![CDATA[1]]></value>
-                            </section>
-                        </section>
-                        <section name="transparency">
-                            <value><![CDATA[1.0]]></value>
-                        </section>
-                    </section>
-                    <section name="iconcolorshader">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="iconscale">
-                        <value><![CDATA[1.0]]></value>
-                    </section>
-                    <section name="labelcolorshader">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="labelscale">
-                        <value><![CDATA[0.0]]></value>
-                    </section>
-                    <section name="linecolor">
-                        <section name="script">
-                            <value><![CDATA[getLColor()]]></value>
-                            <section name="type">
-                                <value><![CDATA[1]]></value>
-                            </section>
-                        </section>
-                    </section>
-                    <section name="linecolorshader">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="linewidth">
-                        <value><![CDATA[3.0]]></value>
-                    </section>
-                    <section name="fillcolorshader">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="showhighlightstyles">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="highlighticonurl">
-                        <section name="script">
-                            <value><![CDATA[getIconUrl()]]></value>
-                            <section name="type">
-                                <value><![CDATA[1]]></value>
-                            </section>
-                        </section>
-                    </section>
-                    <section name="highlighticonscale">
-                        <value><![CDATA[1.0]]></value>
-                    </section>
-                    <section name="highlightlabelcolor">
-                        <value><![CDATA[#FFFFFF]]></value>
-                    </section>
-                    <section name="highlightlabelscale">
-                        <value><![CDATA[0.5]]></value>
-                    </section>
-                    <section name="highlightlinecolor">
-                        <value><![CDATA[#FFFFFF]]></value>
-                    </section>
-                    <section name="shadertype">
-                        <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
-                    </section>
-                </section>
-                <section name="style">
-                    <section name="name">
-                        <value><![CDATA[EsriStyle10]]></value>
-                    </section>
-                    <section name="viewertype">
-                        <value><![CDATA[Esri]]></value>
-                    </section>
-                    <section name="isaddaslayer">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="makeasglobalstyle">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="isaddsymbol">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="isaddicon">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="iconsymboltype">
-                        <value><![CDATA[esriPMS]]></value>
-                    </section>
-                    <section name="iconurl">
-                        <value><![CDATA[serverresources/FLS/icons/epic/Staff.png]]></value>
-                    </section>
-                    <section name="iconwidth">
-                        <value><![CDATA[16]]></value>
-                    </section>
-                    <section name="iconheight">
-                        <value><![CDATA[16]]></value>
-                    </section>
-                    <section name="isaddline">
-                        <value><![CDATA[true]]></value>
-                    </section>
-                    <section name="linetype">
-                        <value><![CDATA[esriCLS]]></value>
-                    </section>
-                    <section name="linestyle">
-                        <value><![CDATA[solid]]></value>
-                    </section>
-                    <section name="linecolor">
-                        <value><![CDATA[#0080FF]]></value>
-                        <section name="transparency">
-                            <value><![CDATA[1.0]]></value>
-                        </section>
-                    </section>
-                    <section name="linewidth">
-                        <value><![CDATA[1]]></value>
-                    </section>
-                    <section name="linejoinstyle">
-                        <value><![CDATA[bevel]]></value>
-                    </section>
-                    <section name="linecapstyle">
-                        <value><![CDATA[round]]></value>
-                    </section>
-                    <section name="isaddfill">
-                        <value><![CDATA[false]]></value>
-                    </section>
-                    <section name="isaddlabel">
-                        <value><![CDATA[false]]></value>
-                    </section>
                 </section>
             </section>
         </section>
@@ -629,7 +495,7 @@ void bindData() {
 			//changed for getting type as Date instead of String for time
 			//$artefact.addAttribute("time", com.wfp.utils.CommonUtils.parseDatePortalFormat(data.getTime().replace("T", " ")));	
 			Date t = (Date) com.wfp.utils.CommonUtils.stringDateToDate(data.getTime().replace("T"," ").replace(".000Z","" ) );	
-			$artefact.addAttribute("time",	t );
+			$artefact.addAttribute("time",	CommonUtils.formatDate( t ) );
 			
 			//$artefact.addAttribute("localTime", com.wfp.utils.CommonUtils.stringDateToDate(data.getDeviceLocalTime()) );		
 			//$artefact.addAttribute("localTimeText", data.getDeviceLocalTime() );   
@@ -691,16 +557,13 @@ String type = $artefact.getAttributeValueAsString("Name");
 if( type!=""&& type.equalsIgnoreCase("trackMe-7") ) return true;
 return false;
 }
-String getIconUrl(){
-	return "serverresources/icons/epic/Tracking_Staff_G.png";
-}
 
 String getIconColor(){
 	return "#00FF00";
 }
 String getLColor()
 {	
-	Date t = (Date) $artefact.getAttributeValue("time");	
+	Date t = (Date) CommonUtils.parseDate( $artefact.getAttributeValueAsString("time"), IEPICConstants.NEW_PORTAL_DATE_FORMAT );	
 	if(t!=null )
 		{
 			Date current = Calendar.getInstance().getTime();
@@ -712,7 +575,20 @@ String getLColor()
 	
  return "#000000";
 
-}		
+}	
+String getStyle()
+{		
+		Date time = (Date) CommonUtils.parseDate( $artefact.getAttributeValueAsString("time"), IEPICConstants.NEW_PORTAL_DATE_FORMAT );	
+		if(time!=null )
+		{
+			Date current = Calendar.getInstance().getTime();
+			int hrs = (int)((current.getTime()-time.getTime())/(1000 * 60 * 60 ) );
+			if( hrs <6  ) return "latestReported"; 
+			else if(hrs <24 ) return "lastDayReported";	
+			else if(hrs>23&&hrs <120 ) return "lastWeekReported";		
+		}
+		return "> 7 Days";
+} 	
 String getLineColor(){
 	try{
 	com.wfp.security.form.DeviceBean data = (com.wfp.security.form.DeviceBean)$customdatamodel;
@@ -736,7 +612,12 @@ String getLineColor(){
 	 }
  
  return "#FF0000";
-}]]></value>
+}
+String getIconUrl(){ return "serverresources/FLS/icons/epic/Tracking_Staff_K.png"; }
+String getIconUrl_G(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_G.png"; }
+String getIconUrl_C(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_C.png"; }
+String getIconUrl_W(){  return "serverresources/FLS/icons/epic/Tracking_Staff_Y.png"; }
+String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.png"; }]]></value>
                 <section name="type">
                     <value><![CDATA[1]]></value>
                 </section>
@@ -753,132 +634,256 @@ String getLineColor(){
         </section>
         <section name="globalstyle">
             <section name="style">
-                <value><![CDATA[EsriStyle1]]></value>
+                <value><![CDATA[> 7 Days]]></value>
                 <section name="name">
-                    <value><![CDATA[EsriStyle1]]></value>
-                </section>
-                <section name="viewertype">
-                    <value><![CDATA[Esri]]></value>
-                </section>
-                <section name="isaddaslayer">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[> 7 Days]]></value>
                 </section>
                 <section name="makeasglobalstyle">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddsymbol">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddicon">
                     <value><![CDATA[true]]></value>
                 </section>
-                <section name="iconsymboltype">
-                    <value><![CDATA[esriPMS]]></value>
-                </section>
                 <section name="iconurl">
-                    <value><![CDATA[images/alert.png]]></value>
-                </section>
-                <section name="iconcolor">
-                    <value><![CDATA[#FF00FF]]></value>
-                    <section name="transparency">
-                        <value><![CDATA[1.0]]></value>
+                    <section name="script">
+                        <value><![CDATA[getIconUrl()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
                     </section>
                 </section>
-                <section name="iconwidth">
-                    <value><![CDATA[16]]></value>
-                </section>
-                <section name="iconheight">
-                    <value><![CDATA[16]]></value>
-                </section>
-                <section name="isaddline">
+                <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
-                <section name="isaddfill">
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
+                <section name="iconscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
-                <section name="isaddlabel">
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolor">
+                    <value><![CDATA[#000000]]></value>
+                </section>
+                <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="balloontext">
+                    <value><![CDATA[Hello]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[0.6]]></value>
+                </section>
+                <section name="highlightlabelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="highlightlinecolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
                 </section>
             </section>
             <section name="style">
-                <value><![CDATA[EsriStyle2]]></value>
+                <value><![CDATA[lastDayReported]]></value>
                 <section name="name">
-                    <value><![CDATA[EsriStyle2]]></value>
-                </section>
-                <section name="viewertype">
-                    <value><![CDATA[Esri]]></value>
-                </section>
-                <section name="isaddaslayer">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[lastDayReported]]></value>
                 </section>
                 <section name="makeasglobalstyle">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddsymbol">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddicon">
                     <value><![CDATA[true]]></value>
-                </section>
-                <section name="iconsymboltype">
-                    <value><![CDATA[esriPMS]]></value>
                 </section>
                 <section name="iconurl">
-                    <value><![CDATA[images/dot.png]]></value>
-                </section>
-                <section name="iconcolor">
-                    <value><![CDATA[#FF0000]]></value>
-                    <section name="transparency">
-                        <value><![CDATA[1.0]]></value>
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_C()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
                     </section>
                 </section>
-                <section name="iconwidth">
-                    <value><![CDATA[16]]></value>
-                </section>
-                <section name="iconheight">
-                    <value><![CDATA[16]]></value>
-                </section>
-                <section name="isaddline">
+                <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
-                <section name="isaddfill">
+                <section name="iconscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
-                <section name="isaddlabel">
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolor">
+                    <value><![CDATA[#00FFFF]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
                     <value><![CDATA[true]]></value>
                 </section>
-                <section name="labelsymboltype">
-                    <value><![CDATA[esriTS]]></value>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_C()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
-                <section name="labelverticalalignment">
-                    <value><![CDATA[middle]]></value>
+                <section name="highlighticonscale">
+                    <value><![CDATA[0.6]]></value>
                 </section>
-                <section name="labelhorizontalalignment">
-                    <value><![CDATA[left]]></value>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[0.5]]></value>
                 </section>
-                <section name="labelisrighttoleft">
-                    <value><![CDATA[false]]></value>
+                <section name="highlightlinecolor">
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
-                <section name="labelkerning">
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[lastWeekReported]]></value>
+                <section name="name">
+                    <value><![CDATA[lastWeekReported]]></value>
+                </section>
+                <section name="makeasglobalstyle">
                     <value><![CDATA[true]]></value>
                 </section>
-                <section name="labelxoffset">
-                    <value><![CDATA[5]]></value>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_W()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
-                <section name="labelfontfamily">
-                    <value><![CDATA[Arial]]></value>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
                 </section>
-                <section name="labelfontsize">
-                    <value><![CDATA[12]]></value>
+                <section name="iconscale">
+                    <value><![CDATA[0.5]]></value>
                 </section>
-                <section name="labelfontstyle">
-                    <value><![CDATA[normal]]></value>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
                 </section>
-                <section name="labelfontweight">
-                    <value><![CDATA[normal]]></value>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
                 </section>
-                <section name="labelfontdecoration">
-                    <value><![CDATA[none]]></value>
+                <section name="linecolor">
+                    <value><![CDATA[#FFFF00]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_W()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[0.6]]></value>
+                </section>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="highlightlinecolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[latestReported]]></value>
+                <section name="name">
+                    <value><![CDATA[latestReported]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolor">
+                    <value><![CDATA[#00FF00]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[0.6]]></value>
+                </section>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="highlightlinecolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
                 </section>
             </section>
         </section>
@@ -1165,6 +1170,30 @@ String getLineColor(){
                 <section name="filterdatarenderer">
                     <value><![CDATA[com.spacetimeinsight.renderer.filter.ArtifactFilterInputRenderer]]></value>
                 </section>
+                <section name="defaultfilter">
+                    <section name="row">
+                        <section name="column">
+                            <value><![CDATA[Occured]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[Like]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[hour]]></value>
+                        </section>
+                    </section>
+                    <section name="row">
+                        <section name="column">
+                            <value><![CDATA[Occured]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[Like]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[minutes]]></value>
+                        </section>
+                    </section>
+                </section>
                 <section name="applydefaultfilter">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1249,7 +1278,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[100]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1270,7 +1299,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[100]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1291,7 +1320,7 @@ String getLineColor(){
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[100]]></value>
+                            <value><![CDATA[200]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -1361,6 +1390,23 @@ String getLineColor(){
                 </section>
                 <section name="numberofpoints">
                     <value><![CDATA[200]]></value>
+                </section>
+            </section>
+            <section name="folder">
+                <section name="name">
+                    <value><![CDATA[Legend11]]></value>
+                </section>
+                <section name="type">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+                <section name="option">
+                    <value><![CDATA[Generate]]></value>
+                </section>
+                <section name="windowtype">
+                    <value><![CDATA[Legend]]></value>
                 </section>
             </section>
         </section>

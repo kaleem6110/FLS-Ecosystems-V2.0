@@ -141,7 +141,23 @@
                     <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[@Lat / Long]]></value>
+                    <value><![CDATA[Latitude/Longitude]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="column"/>
+                <section name="column"/>
+            </section>
+            <section name="row">
+                <section name="column">
+                    <value><![CDATA[QRcode]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[java.lang.String]]></value>
+                </section>
+                <section name="column">
+                    <value><![CDATA[Location QR Code]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[false]]></value>
@@ -455,7 +471,7 @@ void bindData() {
 	
 	addAttribute((String)data.getAttributeValue("Description"));
 		
-	
+	$artefact.addAttribute("QRcode", "QRcode");	
 	
 
 }
@@ -1152,26 +1168,6 @@ String getAuthorUrl(){
                                 </section>
                                 <section name="row">
                                     <section name="column">
-                                    <value><![CDATA[Latitude]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[Text]]></value>
-                                    </section>
-                                    <section name="column"/>
-                                    <section name="column"/>
-                                </section>
-                                <section name="row">
-                                    <section name="column">
-                                    <value><![CDATA[Longitude]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[Text]]></value>
-                                    </section>
-                                    <section name="column"/>
-                                    <section name="column"/>
-                                </section>
-                                <section name="row">
-                                    <section name="column">
                                     <value><![CDATA[Lastseen]]></value>
                                     </section>
                                     <section name="column">
@@ -1183,6 +1179,26 @@ String getAuthorUrl(){
                                 <section name="row">
                                     <section name="column">
                                     <value><![CDATA[ptime]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Text]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
+                                    <value><![CDATA[Latitude]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Text]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
+                                    <value><![CDATA[QRcode]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>

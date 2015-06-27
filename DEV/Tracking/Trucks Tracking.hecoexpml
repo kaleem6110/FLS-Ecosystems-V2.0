@@ -2397,7 +2397,7 @@ String getMissionFullName(String mission )
                     <value><![CDATA[350]]></value>
                 </section>
                 <section name="windowtop">
-                    <value><![CDATA[200]]></value>
+                    <value><![CDATA[300]]></value>
                 </section>
                 <section name="windowleft">
                     <value><![CDATA[200]]></value>
@@ -2445,7 +2445,7 @@ String getMissionFullName(String mission )
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
                     <value><![CDATA[60]]></value>
@@ -2533,7 +2533,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[106]]></value>
+                            <value><![CDATA[140]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -2555,27 +2555,6 @@ String getMissionFullName(String mission )
                         </section>
                         <section name="column">
                             <value><![CDATA[132]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[false]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[None]]></value>
-                        </section>
-                        <section name="column"/>
-                    </section>
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[licensePlate]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[TextAndHtml]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[77]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -2617,7 +2596,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[65]]></value>
+                            <value><![CDATA[95]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -2638,7 +2617,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[92]]></value>
+                            <value><![CDATA[130]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -2659,7 +2638,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[160]]></value>
+                            <value><![CDATA[120]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -2701,12 +2680,14 @@ String getMissionFullName(String mission )
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[150]]></value>
+                            <value><![CDATA[130]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[]]></value>
+                        </section>
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
@@ -2746,14 +2727,6 @@ String getMissionFullName(String mission )
                     <section name="row">
                         <section name="column">
                             <value><![CDATA[description]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[List]]></value>
-                        </section>
-                    </section>
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[licensePlate]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[List]]></value>

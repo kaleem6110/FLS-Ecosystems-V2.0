@@ -1027,7 +1027,7 @@ String getMissionFullName(String mission )
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
-                        <value><![CDATA[getIconUrl_Y()]]></value>
+                        <value><![CDATA[getIconUrl_C()]]></value>
                         <section name="type">
                             <value><![CDATA[1]]></value>
                         </section>

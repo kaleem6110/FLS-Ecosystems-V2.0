@@ -334,10 +334,18 @@
                     <value><![CDATA[json]]></value>
                 </section>
                 <section name="label">
-                    <value><![CDATA[Polygon]]></value>
+                    <value><![CDATA[LineString]]></value>
                 </section>
                 <section name="type">
-                    <value><![CDATA[com.enterprisehorizons.magma.models.PolygonFeature]]></value>
+                    <value><![CDATA[com.enterprisehorizons.magma.models.LineStringFeature]]></value>
+                </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[DISTRICT]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="extrude">
                     <value><![CDATA[false]]></value>
@@ -350,6 +358,9 @@
                 </section>
                 <section name="isblink">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="splinetype">
+                    <value><![CDATA[3]]></value>
                 </section>
                 <section name="generateplacemark">
                     <value><![CDATA[false]]></value>
@@ -413,6 +424,42 @@ String getName() {
                 <value><![CDATA[polygonstyle]]></value>
                 <section name="name">
                     <value><![CDATA[polygonstyle]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="linecolor">
+                    <value><![CDATA[#0080FF]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[polygonstyleesri]]></value>
+                <section name="name">
+                    <value><![CDATA[polygonstyleesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>

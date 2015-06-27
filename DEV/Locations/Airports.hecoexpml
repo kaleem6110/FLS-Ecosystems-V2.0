@@ -738,7 +738,7 @@ String getAuthorUrl(){
                     <value><![CDATA[0]]></value>
                 </section>
                 <section name="iconscale">
-                    <value><![CDATA[1.0]]></value>
+                    <value><![CDATA[0.8]]></value>
                 </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
@@ -759,10 +759,10 @@ String getAuthorUrl(){
                     <value><![CDATA[serverresources\FLS\icons\epic\Locations_Airports.png]]></value>
                 </section>
                 <section name="highlighticonscale">
-                    <value><![CDATA[1.0]]></value>
+                    <value><![CDATA[0.9]]></value>
                 </section>
                 <section name="highlightlabelscale">
-                    <value><![CDATA[1.0]]></value>
+                    <value><![CDATA[0.5]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>

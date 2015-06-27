@@ -963,6 +963,9 @@ String getDescription(){ 	return description; }
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -970,7 +973,15 @@ String getDescription(){ 	return description; }
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_Y()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -990,8 +1001,14 @@ String getDescription(){ 	return description; }
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
@@ -1001,6 +1018,15 @@ String getDescription(){ 	return description; }
                 </section>
                 <section name="showhighlightstyles">
                     <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <value><![CDATA[serverresources/FLS/icons/epic/Helicopter_C.png]]></value>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="highlightlabelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -1020,8 +1046,14 @@ String getDescription(){ 	return description; }
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
@@ -1030,7 +1062,16 @@ String getDescription(){ 	return description; }
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <value><![CDATA[serverresources/FLS/icons/epic/Helicopter_Y.png]]></value>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="highlightlabelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -1050,8 +1091,14 @@ String getDescription(){ 	return description; }
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
@@ -1061,6 +1108,15 @@ String getDescription(){ 	return description; }
                 </section>
                 <section name="showhighlightstyles">
                     <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <value><![CDATA[serverresources/FLS/icons/epic/Helicopter_G.png]]></value>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="highlightlabelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -1080,8 +1136,14 @@ String getDescription(){ 	return description; }
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="iconheading">
+                    <value><![CDATA[0]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
@@ -1091,6 +1153,15 @@ String getDescription(){ 	return description; }
                 </section>
                 <section name="showhighlightstyles">
                     <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <value><![CDATA[serverresources/FLS/icons/epic/Helicopter_K.png]]></value>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="highlightlabelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -1117,6 +1188,9 @@ String getDescription(){ 	return description; }
                 </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
@@ -1211,6 +1285,9 @@ String getDescription(){ 	return description; }
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1219,6 +1296,14 @@ String getDescription(){ 	return description; }
                 </section>
                 <section name="showhighlightstyles">
                     <value><![CDATA[true]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_Y()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -1296,6 +1381,9 @@ String getDescription(){ 	return description; }
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1312,6 +1400,9 @@ String getDescription(){ 	return description; }
                             <value><![CDATA[1]]></value>
                         </section>
                     </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -2341,7 +2432,7 @@ String getDescription(){ 	return description; }
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
                     <value><![CDATA[60]]></value>
@@ -2509,7 +2600,7 @@ String getDescription(){ 	return description; }
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[73]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
@@ -2530,7 +2621,7 @@ String getDescription(){ 	return description; }
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[92]]></value>
+                            <value><![CDATA[150]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
