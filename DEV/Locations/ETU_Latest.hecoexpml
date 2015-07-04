@@ -550,6 +550,9 @@
             </section>
         </section>
         <section name="cache">
+            <value><![CDATA[true]]></value>
+        </section>
+        <section name="isindexed">
             <value><![CDATA[false]]></value>
         </section>
         <section name="experiencedef">
@@ -558,10 +561,13 @@
                     <value><![CDATA[ETU_Latest]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[60]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>
@@ -580,6 +586,9 @@
                 </section>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.HTMLSimpleFeature]]></value>
+                </section>
+                <section name="autozoom">
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="autozoom">
                     <value><![CDATA[false]]></value>
@@ -1318,6 +1327,9 @@ return true;
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[60]]></value>
+                </section>
                 <section name="windowshowbreadcrumbs">
                     <value><![CDATA[true]]></value>
                 </section>
@@ -1427,10 +1439,13 @@ return true;
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[60]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>

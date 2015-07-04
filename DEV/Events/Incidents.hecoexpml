@@ -104,7 +104,7 @@
                     <value><![CDATA[Updated_Date]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[java.lang.String]]></value>
+                    <value><![CDATA[java.util.Date]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[Reported Time]]></value>

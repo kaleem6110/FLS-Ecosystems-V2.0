@@ -160,10 +160,13 @@
                     <value><![CDATA[Electrical]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[60]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>
@@ -182,6 +185,9 @@
                 </section>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.HTMLSimpleFeature]]></value>
+                </section>
+                <section name="autozoom">
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="autozoom">
                     <value><![CDATA[false]]></value>
@@ -649,7 +655,7 @@ boolean authorize(){ return true; }]]></value>
                 <section name="categories">
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[Details]]></value>
+                            <value><![CDATA[Summary]]></value>
                         </section>
                         <section name="column">
                             <section name="columntype">
@@ -861,6 +867,9 @@ boolean authorize(){ return true; }]]></value>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[60]]></value>
+                </section>
                 <section name="windowshowbreadcrumbs">
                     <value><![CDATA[true]]></value>
                 </section>
@@ -970,10 +979,13 @@ boolean authorize(){ return true; }]]></value>
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[60]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>
