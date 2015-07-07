@@ -4,6 +4,14 @@
         <section name="name">
             <value><![CDATA[Staff Tracking]]></value>
         </section>
+        <section name="artifactid">
+            <section name="script">
+                <value><![CDATA[owner]]></value>
+                <section name="type">
+                    <value><![CDATA[2]]></value>
+                </section>
+            </section>
+        </section>
         <section name="artifactname">
             <section name="script">
                 <value><![CDATA[time]]></value>
@@ -844,10 +852,15 @@
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>
@@ -1320,9 +1333,9 @@ String getStyle()
 		{
 			Date current = Calendar.getInstance().getTime();
 			int hrs = (int)((current.getTime()-time.getTime())/(1000 * 60 * 60 ) );
-			if( hrs <6  ) return "latestReported"; 
-			else if(hrs <24 ) return "lastDayReported";	
-			else if(hrs>23&&hrs <120 ) return "lastWeekReported";		
+			if( hrs <24  ) return "latestReported"; 
+			else if(hrs <168 ) return "lastDayReported";	
+			else if(hrs>168&&hrs <720 ) return "lastWeekReported";		
 		}
 		return "placemarkstyle";
 } 
@@ -1354,6 +1367,12 @@ boolean isInDangerZone()
 		if(uid=="") return false;
 		return isInDanger;
 }	
+
+String getRefreshTime(){
+String min="5";
+getSession().getHttpSession().setAttribute("staff_layerRefresh", "Every "+min+" minutes" );
+return min;
+}
 String getDomainId()
 {
 		com.spacetimeinsight.security.bean.UserBean userbean =  getUserBean();
@@ -3073,16 +3092,16 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
                 </section>
                 <section name="windowwidth">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[175]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[305]]></value>
+                    <value><![CDATA[260]]></value>
                 </section>
                 <section name="windowtop">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[50]]></value>
                 </section>
                 <section name="windowleft">
-                    <value><![CDATA[200]]></value>
+                    <value><![CDATA[950]]></value>
                 </section>
                 <section name="hidefrombusinessviewmenu">
                     <value><![CDATA[false]]></value>
@@ -3115,7 +3134,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="windowurl">
-                    <value><![CDATA[serverresources/FLS/icons/epic/legend.html?type=Tracking_Staff]]></value>
+                    <value><![CDATA[serverresources/FLS/icons/epic/legend.html?type=Staff]]></value>
                 </section>
             </section>
             <section name="folder">
@@ -3615,6 +3634,29 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     </section>
                     <section name="row">
                         <section name="column">
+                            <value><![CDATA[status]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[TextAndHtml]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[80]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[false]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[None]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[Right]]></value>
+                        </section>
+                    </section>
+                    <section name="row">
+                        <section name="column">
                             <value><![CDATA[ptimeLastSeen]]></value>
                         </section>
                         <section name="column">
@@ -3635,27 +3677,6 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                         <section name="column">
                             <value><![CDATA[Left]]></value>
                         </section>
-                    </section>
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[ptime]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[TextAndHtml]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[130]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[false]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[Descending]]></value>
-                        </section>
-                        <section name="column"/>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -3701,56 +3722,26 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[status]]></value>
+                            <value><![CDATA[ptime]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[TextAndHtml]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[80]]></value>
+                            <value><![CDATA[130]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[false]]></value>
                         </section>
                         <section name="column">
-                            <section name="columntype">
-                                <value><![CDATA[table]]></value>
-                            </section>
-                            <section name="table">
-                                <section name="row">
-                                    <section name="column">
-                                    <value><![CDATA[Equals]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[CRITICAL]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[#FFFFFF]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[#FF0000]]></value>
-                                    </section>
-                                </section>
-                                <section name="row">
-                                    <section name="column">
-                                    <value><![CDATA[Equals]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[SAFE]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[#FFFFFF]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[#00FF00]]></value>
-                                    </section>
-                                </section>
-                            </section>
+                            <value><![CDATA[]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[None]]></value>
+                            <value><![CDATA[Descending]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Left]]></value>
+                        </section>
                     </section>
                 </section>
                 <section name="windowinlinefilters">

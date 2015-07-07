@@ -328,7 +328,12 @@
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Minutes]]></value>
@@ -619,6 +624,11 @@ String getDashboardWHId(){
 
 String getDashboardWBId(){
 	return "Waybill::"+$artefact.getAttributeValueAsString("name");
+}
+String getRefreshTime(){
+String min="60";
+getSession().getHttpSession().setAttribute("warehouses_layerRefresh", "Every "+min+" minutes" );
+return min;
 }]]></value>
                 <section name="type">
                     <value><![CDATA[1]]></value>
@@ -1423,7 +1433,12 @@ String getDashboardWBId(){
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="windowshowbreadcrumbs">
                     <value><![CDATA[true]]></value>
@@ -1537,7 +1552,12 @@ String getDashboardWBId(){
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Minutes]]></value>

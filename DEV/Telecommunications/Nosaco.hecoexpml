@@ -4,6 +4,14 @@
         <section name="name">
             <value><![CDATA[Nosaco]]></value>
         </section>
+        <section name="artifactid">
+            <section name="script">
+                <value><![CDATA[vehicleID]]></value>
+                <section name="type">
+                    <value><![CDATA[2]]></value>
+                </section>
+            </section>
+        </section>
         <section name="artifactname">
             <section name="script">
                 <value><![CDATA[time]]></value>
@@ -263,7 +271,7 @@
                     <value><![CDATA[java.lang.String]]></value>
                 </section>
                 <section name="column">
-                    <value><![CDATA[@ Lat/Long]]></value>
+                    <value><![CDATA[Latitude/Longitude]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[false]]></value>
@@ -512,10 +520,15 @@
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>
@@ -578,21 +591,7 @@
         <section name="blinkloopcount">
             <value><![CDATA[2]]></value>
         </section>
-        <section name="listeners">
-            <section name="listener">
-                <section name="name">
-                    <value><![CDATA[ARTEFACT_ON_DATA_LOAD_EVENT]]></value>
-                </section>
-                <section name="event">
-                    <section name="script">
-                        <value><![CDATA[fireDashboardRefreshEvent()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
-                </section>
-            </section>
-        </section>
+        <section name="listeners"/>
         <section name="layout">
             <section name="folder">
                 <section name="name">
@@ -956,6 +955,11 @@ String getMissionFullName(String mission )
          else s="-";
          return s;
        }
+} 
+String getRefreshTime(){
+String min="5";
+getSession().getHttpSession().setAttribute("nosaco_layerRefresh", "Every "+min+" minutes" );
+return min;
 }]]></value>
                 <section name="type">
                     <value><![CDATA[1]]></value>
@@ -1980,7 +1984,12 @@ String getMissionFullName(String mission )
                     <value><![CDATA[onInterval]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="windowshowbreadcrumbs">
                     <value><![CDATA[true]]></value>
@@ -2097,13 +2106,18 @@ String getMissionFullName(String mission )
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
+                    <value><![CDATA[Minutes]]></value>
                 </section>
                 <section name="isrefreshoncameramove">
                     <value><![CDATA[false]]></value>
@@ -2507,7 +2521,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[vehicleID]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2515,7 +2529,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[description]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2523,7 +2537,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[licensePlate]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2531,7 +2545,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[deviceId]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2539,7 +2553,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[noOfDays]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2547,7 +2561,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[totalWaypoints]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2555,7 +2569,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[mission]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2563,7 +2577,7 @@ String getMissionFullName(String mission )
                             <value><![CDATA[organisation]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[List]]></value>
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                     <section name="row">
@@ -2572,6 +2586,14 @@ String getMissionFullName(String mission )
                         </section>
                         <section name="column">
                             <value><![CDATA[Date]]></value>
+                        </section>
+                    </section>
+                    <section name="row">
+                        <section name="column">
+                            <value><![CDATA[ptimeLastSeen]]></value>
+                        </section>
+                        <section name="column">
+                            <value><![CDATA[TextContains]]></value>
                         </section>
                     </section>
                 </section>
@@ -2602,7 +2624,7 @@ String getMissionFullName(String mission )
                     </section>
                 </section>
                 <section name="createchartfromtable">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <value><![CDATA[/images/highlight.png]]></value>
@@ -2990,16 +3012,16 @@ String getMissionFullName(String mission )
                     <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
                 </section>
                 <section name="windowwidth">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[175]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[260]]></value>
                 </section>
                 <section name="windowtop">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[50]]></value>
                 </section>
                 <section name="windowleft">
-                    <value><![CDATA[200]]></value>
+                    <value><![CDATA[950]]></value>
                 </section>
                 <section name="hidefrombusinessviewmenu">
                     <value><![CDATA[false]]></value>

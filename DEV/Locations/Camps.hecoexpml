@@ -4,6 +4,14 @@
         <section name="name">
             <value><![CDATA[Camps]]></value>
         </section>
+        <section name="artifactid">
+            <section name="script">
+                <value><![CDATA[id]]></value>
+                <section name="type">
+                    <value><![CDATA[2]]></value>
+                </section>
+            </section>
+        </section>
         <section name="artifactname">
             <section name="script">
                 <value><![CDATA[Name]]></value>
@@ -312,7 +320,12 @@
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Minutes]]></value>
@@ -576,6 +589,11 @@ String getLastRefreshTime(){ 	return lastRefreshTime; }
 String getDescription(){ 	return description; } 
 String getAuthorUrl(){	
 	return serverRootUrl+"/CustomView.jsp?layername="+getLayerName()+"&Datasource ="+datasource+"&Description="+description+"&Last Refresh Time="+lastRefreshTime;
+}
+String getRefreshTime(){
+String min="60";
+getSession().getHttpSession().setAttribute("camps_layerRefresh", "Every "+min+" minutes" );
+return min;
 }]]></value>
                 <section name="type">
                     <value><![CDATA[1]]></value>
@@ -1323,7 +1341,12 @@ String getAuthorUrl(){
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="windowshowbreadcrumbs">
                     <value><![CDATA[true]]></value>
@@ -1437,7 +1460,12 @@ String getAuthorUrl(){
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[60]]></value>
+                    <section name="script">
+                        <value><![CDATA[getRefreshTime()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Minutes]]></value>
