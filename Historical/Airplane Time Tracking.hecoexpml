@@ -61,7 +61,7 @@
             </section>
             <section name="row">
                 <section name="column">
-                    <value><![CDATA[Occured]]></value>
+                    <value><![CDATA[ptimeLastSeen]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[java.lang.String]]></value>
@@ -270,7 +270,7 @@
                         </section>
                         <section name="row">
                             <section name="column">
-                                <value><![CDATA[Occured]]></value>
+                                <value><![CDATA[ptimeLastSeen]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -477,7 +477,7 @@ void bindData()
     		    $artefact.addAttribute("latitude",cord[1]);
     		     $artefact.addAttribute("LatitudeStr", cord[1]+"/"+cord[0] );
 	 			$artefact.addAttribute("time", data.getTime() ) ; 
-	 			$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
+	 			$artefact.addAttribute("ptimeLastSeen", data.getTime() );
 	 			$artefact.addAttribute("QRcode", "QRcode");
 	 			$artefact.addAttribute("localTime", data.getDeviceLocalTime() ) ; 
 				
@@ -1265,7 +1265,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Airplane
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[Occured]]></value>
+                            <value><![CDATA[ptimeLastSeen]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[TextAndHtml]]></value>
@@ -1283,7 +1283,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Airplane
                             <value><![CDATA[None]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Center]]></value>
+                            <value><![CDATA[Left]]></value>
                         </section>
                     </section>
                     <section name="row">

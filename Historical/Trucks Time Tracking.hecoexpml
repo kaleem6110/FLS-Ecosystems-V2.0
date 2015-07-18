@@ -79,7 +79,7 @@
             </section>
             <section name="row">
                 <section name="column">
-                    <value><![CDATA[Occured]]></value>
+                    <value><![CDATA[ptimeLastSeen]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[java.lang.String]]></value>
@@ -245,6 +245,16 @@
                         <section name="row">
                             <section name="column">
                                 <value><![CDATA[organisation]]></value>
+                            </section>
+                            <section name="column">
+                                <value><![CDATA[Text]]></value>
+                            </section>
+                            <section name="column"/>
+                            <section name="column"/>
+                        </section>
+                        <section name="row">
+                            <section name="column">
+                                <value><![CDATA[ptimeLastSeen]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -467,7 +477,7 @@ void bindData() {
     		    $artefact.addAttribute("latitude",cord[1]);
 	 			$artefact.addAttribute("time", data.getTime() ) ; 
 	 			$artefact.addAttribute("localTime", data.getDeviceLocalTime() ) ; 
-	 			$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
+	 			$artefact.addAttribute("ptimeLastSeen",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
 	 			
 				
 				//Setting Vehicle ID
@@ -1260,7 +1270,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Trucks_R.png"; }]
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[Occured]]></value>
+                            <value><![CDATA[ptimeLastSeen]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[TextAndHtml]]></value>
@@ -1278,7 +1288,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Trucks_R.png"; }]
                             <value><![CDATA[None]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Center]]></value>
+                            <value><![CDATA[Left]]></value>
                         </section>
                     </section>
                     <section name="row">

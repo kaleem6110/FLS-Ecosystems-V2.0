@@ -61,7 +61,7 @@
             </section>
             <section name="row">
                 <section name="column">
-                    <value><![CDATA[Occured]]></value>
+                    <value><![CDATA[ptimeLastSeen]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[java.lang.String]]></value>
@@ -270,7 +270,7 @@
                         </section>
                         <section name="row">
                             <section name="column">
-                                <value><![CDATA[Occured]]></value>
+                                <value><![CDATA[ptimeLastSeen]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -328,7 +328,10 @@
                     <value><![CDATA[VehicleTime Tracking]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="periodicrefreshrate">
+                    <value><![CDATA[300]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Seconds]]></value>
@@ -350,6 +353,9 @@
                 </section>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.HTMLSimpleFeature]]></value>
+                </section>
+                <section name="autozoom">
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="autozoom">
                     <value><![CDATA[false]]></value>
@@ -388,6 +394,11 @@
         <section name="blinkloopcount">
             <value><![CDATA[2]]></value>
         </section>
+        <section name="constraints">
+            <section name="constraint">
+                <value><![CDATA[cameraboundary]]></value>
+            </section>
+        </section>
         <section name="listeners"/>
         <section name="layout">
             <section name="folder">
@@ -403,7 +414,12 @@
                     <value><![CDATA[json]]></value>
                 </section>
                 <section name="label">
-                    <value><![CDATA[LineString]]></value>
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
                 </section>
                 <section name="type">
                     <value><![CDATA[com.enterprisehorizons.magma.models.LineStringFeature]]></value>
@@ -449,6 +465,47 @@
                     <value><![CDATA[everypoint]]></value>
                 </section>
             </section>
+            <section name="folder">
+                <section name="name">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="descriptiontype">
+                    <value><![CDATA[json]]></value>
+                </section>
+                <section name="label">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="type">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.PlacemarkFeature]]></value>
+                </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="extrude">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="globalstyleid">
+                    <value><![CDATA[latestReportedIcon]]></value>
+                </section>
+                <section name="isblink">
+                    <value><![CDATA[false]]></value>
+                </section>
+            </section>
         </section>
         <section name="scriptor">
             <section name="body">
@@ -484,8 +541,10 @@ void bindData() {
     		    $artefact.addAttribute("latitude",cord[1]);
     		    $artefact.addAttribute("LatitudeStr", cord[1]+"/"+cord[0] );
 			
-	 			$artefact.addAttribute("time", data.getTime() ) ; 
-	 			$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
+	 			Date t = (Date) com.wfp.utils.CommonUtils.stringDateToDate(data.getTime().replace("T"," ").replace(".000Z","" ) );	
+				 t = CommonUtils.parseDate( CommonUtils.formatDate( t ) , IEPICConstants.NEW_PORTAL_DATE_FORMAT );
+			$artefact.addAttribute("time", t );//$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
+	 			$artefact.addAttribute("ptimeLastSeen",  data.getTime() );
 	 			$artefact.addAttribute("localTime", CommonUtils.getLocalTime( offset ,data.getDeviceLocalTime(),IEPICConstants.NEW_PORTAL_DATE_FORMAT )   ) ; 
 				
 				//Setting Vehicle ID
@@ -560,7 +619,7 @@ String getLColor()
 }		
  String getStyle()
 {		
-		Date time = (Date) CommonUtils.parseDate( $artefact.getAttributeValueAsString("time"), IEPICConstants.NEW_PORTAL_DATE_FORMAT );	
+		Date time = (Date) $artefact.getAttribute("time");	
 		if(time!=null )
 		{
 			Date current = Calendar.getInstance().getTime();
@@ -595,6 +654,7 @@ String getLineColor(){
  
  return "#FF0000";
 }
+String getIconUrl_H(){ return "serverresources/FLS/icons/epic/Vehicle.png"; }
 String getIconUrl(){ return "serverresources/FLS/icons/epic/Tracking_Vehicles_K.png"; }
 String getIconUrl_G(){ 	return "serverresources/FLS/icons/epic/Tracking_Vehicles_G.png"; }
 String getIconUrl_C(){ 	return "serverresources/FLS/icons/epic/Tracking_Vehicles_C.png"; }
@@ -609,7 +669,37 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
             <value><![CDATA[true]]></value>
         </section>
         <section name="istimeaware">
+            <value><![CDATA[true]]></value>
+        </section>
+        <section name="datefield">
+            <value><![CDATA[time]]></value>
+        </section>
+        <section name="datefieldformat">
+            <value><![CDATA[yyyy-MM-dd HH:mm:ss]]></value>
+        </section>
+        <section name="inputdateformat">
+            <value><![CDATA[yyyy-MM-dd HH:mm:ss]]></value>
+        </section>
+        <section name="isshowintervals">
             <value><![CDATA[false]]></value>
+        </section>
+        <section name="isapplydefaulttimefilter">
+            <value><![CDATA[false]]></value>
+        </section>
+        <section name="showtimeslider">
+            <value><![CDATA[true]]></value>
+        </section>
+        <section name="timesliderendtime">
+            <value><![CDATA[time]]></value>
+        </section>
+        <section name="showrecords">
+            <value><![CDATA[AllRecords]]></value>
+        </section>
+        <section name="displayinterval">
+            <value><![CDATA[1]]></value>
+        </section>
+        <section name="intervalunit">
+            <value><![CDATA[Days]]></value>
         </section>
         <section name="isadddefaultinfowindow">
             <value><![CDATA[false]]></value>
@@ -624,12 +714,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -652,6 +737,9 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
+                </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -659,7 +747,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                     <value><![CDATA[Hello]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -694,12 +782,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl_C()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -719,11 +802,14 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
+                </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -755,12 +841,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl_W()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -780,11 +861,14 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
+                </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -816,12 +900,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl_G()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -840,6 +919,73 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[2.0]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[0.6]]></value>
+                </section>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="highlightlinecolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[latestReportedIcon]]></value>
+                <section name="name">
+                    <value><![CDATA[latestReportedIcon]]></value>
+                </section>
+                <section name="makeasglobalstyle">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_H()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolor">
+                    <value><![CDATA[#00FF80]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
@@ -863,6 +1009,9 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                 </section>
                 <section name="highlightlinecolor">
                     <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="highlightlinewidth">
+                    <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
@@ -1303,7 +1452,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[Occured]]></value>
+                            <value><![CDATA[ptimeLastSeen]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[TextAndHtml]]></value>
@@ -1321,7 +1470,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Vehicles
                             <value><![CDATA[None]]></value>
                         </section>
                         <section name="column">
-                            <value><![CDATA[Center]]></value>
+                            <value><![CDATA[Left]]></value>
                         </section>
                     </section>
                     <section name="row">

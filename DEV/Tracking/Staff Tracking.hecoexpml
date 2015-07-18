@@ -1117,34 +1117,18 @@ boolean authorizeDevice()
 		 	if( t!=null && t.getYear()>115 ) return false; 
 			if(userProfilesList ==null ) userProfilesList = com.wfp.utils.LDAPUtils.getUserProfilesList( userbean.getUserUniqueId());	
 		}catch(Exception e){ }	
-		String deviceId = $artefact.getAttributeValueAsString("deviceId");
+		String deviceId = $artefact.getAttributeValueAsString("deviceId"); 
 		List<String> deviceMissionList = LDAPUtils.getLDAPUserDtlsMap().get( deviceId ).getAuthorizedGroupsList();
-	  	List<String> userMissionList = getUserMissionList( userbean.getUserUniqueId() );  
-	  	String dOrg = $artefact.getAttributeValueAsString("Organization");
-	  	
-	  	if( userMissionList!=null && deviceMissionList!=null )
-  		{
-  				if( userOrgList == null ) userOrgList= LDAPWSUtils.getOrganizationByUnit( getUserUniqueId() );	
-  				for(String deviceMission: deviceMissionList   )
-	  			{
-		  		   	 if( userMissionList.contains( deviceMission ) )
-		  		     {  		     
-		  		     		  		     	
-		  		     	if( userOrgList!=null && userOrgList.size()>0 )
-		  		     	{
-	  		     			for( String userO : userOrgList )
-	  		     			{
-	  		     				if( dOrg.contains( userO ) ){
-	  		     				 isValid= true; return true;
-	  		     				 } 	
-	  		     			}
-		  		     	
-		  		     	} 
-		  		     		  		     	
-		  		     }
-	  		}
+	  	List<String> userMissionList = getUserMissionList( userbean.getUserUniqueId() ); 
+	  	if( userOrgList == null ) userOrgList= LDAPWSUtils.getOrganizationByUnit( getUserUniqueId() );	 
+	  	if(! CommonUtils.isOrgMatches( userOrgList , $artefact.getAttributeValueAsString("Organization") ) ) return false;		
+		if( userMissionList!=null && deviceMissionList!=null )
+  		{		
+  			 Set<String> intersect = new HashSet<String>( userMissionList );
+    		intersect.retainAll( deviceMissionList );
+    		System.out.println(intersect.size());
+    		if( intersect.size()>0 ) return true;
 	  	}
-	  
 	  	return isValid;
 }	
 String getUserStatus(String uid )
@@ -1227,7 +1211,7 @@ void bindData()
 			 	$artefact.addAttribute("totalWaypoints",  data.getTotalWaypoints()  );
 			 	if( data.getNoOfDays().equals("0") ) data.setNoOfDays("1");
 			 	$artefact.addAttribute("noOfDays",  data.getNoOfDays());		 	
-			 	if( !data.getTotalWaypoints().equals("1") )
+			 	if( Integer.parseInt(data.getTotalWaypoints())>1  )
 			 	$artefact.addAttribute("fetchHistory", data.getName());		 	
 			 	
 			 	String city = data.getLocality().replace("[","").replace("]","");
@@ -1511,25 +1495,6 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
         </section>
         <section name="isshowintervals">
             <value><![CDATA[false]]></value>
-        </section>
-        <section name="defaulttimerange">
-            <value><![CDATA[startendtime]]></value>
-        </section>
-        <section name="defaultstarttime">
-            <section name="script">
-                <value><![CDATA[time]]></value>
-                <section name="type">
-                    <value><![CDATA[2]]></value>
-                </section>
-            </section>
-        </section>
-        <section name="defaultendtime">
-            <section name="script">
-                <value><![CDATA[time]]></value>
-                <section name="type">
-                    <value><![CDATA[2]]></value>
-                </section>
-            </section>
         </section>
         <section name="isapplydefaulttimefilter">
             <value><![CDATA[false]]></value>
@@ -2440,7 +2405,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[css/images/<theme>/icon_tabbedviewwindow.png]]></value>
                 </section>
                 <section name="windowcustomjsurl">
-                    <value><![CDATA[ ]]></value>
+                    <value><![CDATA[FLS/js/jquery.magnific-popup.min.js]]></value>
                 </section>
                 <section name="isshowwindowtoolbar">
                     <value><![CDATA[true]]></value>
@@ -2583,6 +2548,16 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                             <section name="table">
                                 <section name="row">
                                     <section name="column">
+                                    <value><![CDATA[jpegPhoto]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Image]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
                                     <value><![CDATA[userID]]></value>
                                     </section>
                                     <section name="column">
@@ -2637,16 +2612,6 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>
-                                    </section>
-                                    <section name="column"/>
-                                    <section name="column"/>
-                                </section>
-                                <section name="row">
-                                    <section name="column">
-                                    <value><![CDATA[jpegPhoto]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[Image]]></value>
                                     </section>
                                     <section name="column"/>
                                     <section name="column"/>
@@ -3095,7 +3060,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[175]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[260]]></value>
+                    <value><![CDATA[275]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[50]]></value>
@@ -4156,336 +4121,6 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 </section>
                 <section name="filterdynamicdatasourceoptimizequery">
                     <value><![CDATA[true]]></value>
-                </section>
-            </section>
-            <section name="folder">
-                <section name="name">
-                    <value><![CDATA[Statistics]]></value>
-                </section>
-                <section name="type">
-                    <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
-                </section>
-                <section name="windowshowbreadcrumbs">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="windowtype">
-                    <value><![CDATA[XYChart]]></value>
-                </section>
-                <section name="viewerhelp">
-                    <value><![CDATA[#Chart_Window/Chart_Types/XY_Charts/Using_X_Y_Charts.htm]]></value>
-                </section>
-                <section name="loadbydefault">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="windowiconurl">
-                    <value><![CDATA[css/images/<theme>/icon_xychart.png]]></value>
-                </section>
-                <section name="windowgroupname">
-                    <value><![CDATA[Charts]]></value>
-                </section>
-                <section name="windowgroupiconurl">
-                    <value><![CDATA[css/images/<theme>/icon_xychart.png]]></value>
-                </section>
-                <section name="isreloadconfiguration">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="showpluginproperties">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="windowpluginname">
-                    <value><![CDATA[siViewerXYChart]]></value>
-                </section>
-                <section name="windowpluginjsfile">
-                    <value><![CDATA[window/charts/xyChart/com.spacetimeinsight.viewer.window.xyChart]]></value>
-                </section>
-                <section name="windowdrawerpluginname">
-                    <value><![CDATA[siViewerXYChartDrawer]]></value>
-                </section>
-                <section name="windowdrawerpluginjsfile">
-                    <value><![CDATA[window/charts/xyChart/com.spacetimeinsight.viewer.window.xyChartDrawer]]></value>
-                </section>
-                <section name="windowtoolbarpluginname">
-                    <value><![CDATA[siViewerChartWindowToolBar]]></value>
-                </section>
-                <section name="windowtoolbarpluginjsfile">
-                    <value><![CDATA[window/charts/com.spacetimeinsight.viewer.window.chartWindowToolbar]]></value>
-                </section>
-                <section name="windowfooterpluginname">
-                    <value><![CDATA[siViewerFooter]]></value>
-                </section>
-                <section name="windowfooterpluginjsfile">
-                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
-                </section>
-                <section name="windowwidth">
-                    <value><![CDATA[800]]></value>
-                </section>
-                <section name="windowheight">
-                    <value><![CDATA[400]]></value>
-                </section>
-                <section name="windowtop">
-                    <value><![CDATA[150]]></value>
-                </section>
-                <section name="windowleft">
-                    <value><![CDATA[220]]></value>
-                </section>
-                <section name="hidefrombusinessviewmenu">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="allowcopy">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="allowprint">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="allowsaveas">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isattributelink">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isnestedwindow">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="refreshonbusinessviewrefresh">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="datasourcetype">
-                    <value><![CDATA[Artifact]]></value>
-                </section>
-                <section name="datafetcher">
-                    <value><![CDATA[com.spacetimeinsight.renderer.window.data.ArtifactDataFetcher]]></value>
-                </section>
-                <section name="datatransformer">
-                    <value><![CDATA[com.spacetimeinsight.renderer.window.transform.XYChartDataTransformer]]></value>
-                </section>
-                <section name="hasgeographicdata">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="donotloadbydefault">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isbackground">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isshared">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
-                </section>
-                <section name="isrefreshoncameramove">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="iscamerasensitive">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isrefreshonlasso">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="istimeaware">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="filterdatasourcetype">
-                    <value><![CDATA[Artifact]]></value>
-                </section>
-                <section name="filterdatarenderer">
-                    <value><![CDATA[com.spacetimeinsight.renderer.filter.ArtifactFilterInputRenderer]]></value>
-                </section>
-                <section name="applydefaultfilter">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="showInDataFilter">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="enableFilter">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="showfilterpluginproperties">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="filterwindowpluginname">
-                    <value><![CDATA[siViewerClientSideTable]]></value>
-                </section>
-                <section name="filterwindowpluginjsfile">
-                    <value><![CDATA[dataFilter/com.spacetimeinsight.viewer.ui.dataFilter]]></value>
-                </section>
-                <section name="filterwindowdrawerpluginname">
-                    <value><![CDATA[siViewerClientSideTableDrawer]]></value>
-                </section>
-                <section name="filterwindowtoolbarpluginname">
-                    <value><![CDATA[siViewerWindowToolBar]]></value>
-                </section>
-                <section name="filterwindowtoolbarpluginjsfile">
-                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.windowToolBar]]></value>
-                </section>
-                <section name="filterwindowfooterpluginname">
-                    <value><![CDATA[siViewerFooter]]></value>
-                </section>
-                <section name="filterwindowfooterpluginjsfile">
-                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
-                </section>
-                <section name="isshowcharttitle">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="charttitle">
-                    <value><![CDATA[TRACKING CHART]]></value>
-                </section>
-                <section name="isshowsecondarycharttitle">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="secondarycharttitle">
-                    <value><![CDATA[STAFF]]></value>
-                </section>
-                <section name="showlegend">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isshowembeddedlegend">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isembeddedlegendfloating">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="embeddedlegendhalign">
-                    <value><![CDATA[center]]></value>
-                </section>
-                <section name="embeddedlegendvalign">
-                    <value><![CDATA[bottom]]></value>
-                </section>
-                <section name="isshowtooltip">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="issharedtooltip">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isshowdatalabels">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isshowdatalabelsinside">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="datalabelshalign">
-                    <value><![CDATA[center]]></value>
-                </section>
-                <section name="showtable">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="tablesizeinchartwindow">
-                    <value><![CDATA[30]]></value>
-                </section>
-                <section name="charttype">
-                    <value><![CDATA[ColumnChart]]></value>
-                </section>
-                <section name="istimeserieschart">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="xfield">
-                    <value><![CDATA[userID]]></value>
-                </section>
-                <section name="chartseries">
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[noOfDays]]></value>
-                        </section>
-                        <section name="column"/>
-                        <section name="column">
-                            <value><![CDATA[true]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[0]]></value>
-                        </section>
-                        <section name="column"/>
-                        <section name="column">
-                            <value><![CDATA[]]></value>
-                        </section>
-                    </section>
-                    <section name="row">
-                        <section name="column">
-                            <value><![CDATA[totalWaypoints]]></value>
-                        </section>
-                        <section name="column"/>
-                        <section name="column">
-                            <value><![CDATA[true]]></value>
-                        </section>
-                        <section name="column">
-                            <value><![CDATA[0]]></value>
-                        </section>
-                        <section name="column"/>
-                        <section name="column">
-                            <value><![CDATA[]]></value>
-                        </section>
-                    </section>
-                </section>
-                <section name="seriesin">
-                    <value><![CDATA[Column]]></value>
-                </section>
-                <section name="coloraxismin">
-                    <value><![CDATA[0.0]]></value>
-                </section>
-                <section name="coloraxismincolor">
-                    <value><![CDATA[#41D757]]></value>
-                </section>
-                <section name="coloraxismaxcolor">
-                    <value><![CDATA[#1209FB]]></value>
-                </section>
-                <section name="xaxisposition">
-                    <value><![CDATA[bottom]]></value>
-                </section>
-                <section name="xaxistype">
-                    <value><![CDATA[linear]]></value>
-                </section>
-                <section name="xaxisshowgridlines">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="xaxisgridlinestyle">
-                    <value><![CDATA[Solid]]></value>
-                </section>
-                <section name="xaxisshowtitle">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="xaxisshowlabels">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="xaxisreverseorder">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="xaxisshowmajorticks">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="xaxisshowminorticks">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="yaxisposition">
-                    <value><![CDATA[left]]></value>
-                </section>
-                <section name="yaxistype">
-                    <value><![CDATA[linear]]></value>
-                </section>
-                <section name="yaxisshowgridlines">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="yaxisgridlinestyle">
-                    <value><![CDATA[Solid]]></value>
-                </section>
-                <section name="yaxisshowtitle">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="yaxisshowlabels">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="yaxisreverseorder">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="yaxisshowmajorticks">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="yaxisshowminorticks">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isaddmultipleyaxis">
-                    <value><![CDATA[false]]></value>
                 </section>
             </section>
         </section>

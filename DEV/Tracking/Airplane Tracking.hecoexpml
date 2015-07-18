@@ -531,6 +531,9 @@
         </section>
         <section name="constraints">
             <section name="constraint">
+                <value><![CDATA[cameraboundary]]></value>
+            </section>
+            <section name="constraint">
                 <value><![CDATA[visibility]]></value>
                 <section name="script">
                     <value><![CDATA[authorizeDevice()]]></value>
@@ -1661,7 +1664,7 @@ return min;
                     <value><![CDATA[520]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[370]]></value>
+                    <value><![CDATA[380]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[300]]></value>
@@ -2070,7 +2073,7 @@ return min;
                     <value><![CDATA[175]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[260]]></value>
+                    <value><![CDATA[275]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[50]]></value>

@@ -79,7 +79,7 @@
             </section>
             <section name="row">
                 <section name="column">
-                    <value><![CDATA[Occured]]></value>
+                    <value><![CDATA[ptimeLastSeen]]></value>
                 </section>
                 <section name="column">
                     <value><![CDATA[java.lang.String]]></value>
@@ -270,7 +270,7 @@
                         </section>
                         <section name="row">
                             <section name="column">
-                                <value><![CDATA[Occured]]></value>
+                                <value><![CDATA[ptimeLastSeen]]></value>
                             </section>
                             <section name="column">
                                 <value><![CDATA[Text]]></value>
@@ -472,6 +472,47 @@
                     <value><![CDATA[everypoint]]></value>
                 </section>
             </section>
+            <section name="folder">
+                <section name="name">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="descriptiontype">
+                    <value><![CDATA[json]]></value>
+                </section>
+                <section name="label">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="type">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.PlacemarkFeature]]></value>
+                </section>
+                <section name="hoverlabel">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="extrude">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="globalstyleid">
+                    <value><![CDATA[latestReportedIcon]]></value>
+                </section>
+                <section name="isblink">
+                    <value><![CDATA[false]]></value>
+                </section>
+            </section>
         </section>
         <section name="scriptor">
             <section name="body">
@@ -501,12 +542,13 @@ void bindData() {
 			//changed for getting type as Date instead of String for time
 			//$artefact.addAttribute("time", com.wfp.utils.CommonUtils.parseDatePortalFormat(data.getTime().replace("T", " ")));	
 			Date t = (Date) com.wfp.utils.CommonUtils.stringDateToDate(data.getTime().replace("T"," ").replace(".000Z","" ) );	
-			$artefact.addAttribute("time",	CommonUtils.formatDate( t ) );
+			 t = CommonUtils.parseDate( CommonUtils.formatDate( t ) , IEPICConstants.NEW_PORTAL_DATE_FORMAT );
+			$artefact.addAttribute("time", t );
 			
 			//$artefact.addAttribute("localTime", com.wfp.utils.CommonUtils.stringDateToDate(data.getDeviceLocalTime()) );		
 			//$artefact.addAttribute("localTimeText", data.getDeviceLocalTime() );   
 			
-			$artefact.addAttribute("name", data.getName());  
+			$artefact.addAttribute("name",  getSession().getHttpSession().getAttribute("session_staff_deviceId").toString() );  
 			$artefact.addAttribute("Organization", data.getOrganization());
 			$artefact.addAttribute("title", data.getTitle());
 			$artefact.addAttribute("owner", getFullName(data));
@@ -515,7 +557,9 @@ void bindData() {
 			$artefact.addAttribute("Phone", com.wfp.utils.CommonUtils.getPhoneDtls(data.getMobilesList()));
 			$artefact.addAttribute("LatitudeStr", cord[1]+" / "+cord[0] );
 			$artefact.addAttribute("QRcode", "QRcode");
-			$artefact.addAttribute("Occured",  com.wfp.utils.DHLUtils.getHumanReadable( t ) );
+			//$artefact.addAttribute("Occured",  com.wfp.utils.DHLUtils.getHumanReadable( t ) );
+			$artefact.addAttribute("ptimeLastSeen",  CommonUtils.formatDate( t ) );
+		
 		
 		} 
 }
@@ -534,7 +578,7 @@ String getFullName(com.wfp.security.form.DeviceBean data)
 List getData() {
 Object deviceId = getSession().getHttpSession().getAttribute("session_staff_deviceId");
 if( deviceId==null ) deviceId="trackMe-1";
-//System.out.println("deviceId:::::::::"+deviceId);
+System.out.println("deviceId:::::::::"+deviceId);
 return LDAPWSUtils.getUnitHistorical( deviceId.toString(), "staff" ); 
   
 }
@@ -584,7 +628,7 @@ String getLColor()
 }	
 String getStyle()
 {		
-		Date time = (Date) CommonUtils.parseDate( $artefact.getAttributeValueAsString("time"), IEPICConstants.NEW_PORTAL_DATE_FORMAT );	
+		Date time = (Date)  $artefact.getAttribute("time");	
 		if(time!=null )
 		{
 			Date current = Calendar.getInstance().getTime();
@@ -619,6 +663,7 @@ String getLineColor(){
  
  return "#FF0000";
 }
+String getIconUrl_H(){ return "serverresources/FLS/icons/epic/Staff.png"; }
 String getIconUrl(){ return "serverresources/FLS/icons/epic/Tracking_Staff_K.png"; }
 String getIconUrl_G(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_G.png"; }
 String getIconUrl_C(){ 	return "serverresources/FLS/icons/epic/Tracking_Staff_C.png"; }
@@ -639,22 +684,31 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
             <value><![CDATA[time]]></value>
         </section>
         <section name="datefieldformat">
-            <value><![CDATA[yyyy-MM-dd HH:mm:ss]]></value>
+            <value><![CDATA[YYYY-MM-DD HH:MM:SS]]></value>
         </section>
         <section name="inputdateformat">
             <value><![CDATA[yyyy-MM-dd HH:mm:ss]]></value>
         </section>
         <section name="isshowintervals">
-            <value><![CDATA[false]]></value>
-        </section>
-        <section name="defaulttimerange">
-            <value><![CDATA[startendtime]]></value>
+            <value><![CDATA[true]]></value>
         </section>
         <section name="isapplydefaulttimefilter">
             <value><![CDATA[false]]></value>
         </section>
         <section name="showtimeslider">
-            <value><![CDATA[false]]></value>
+            <value><![CDATA[true]]></value>
+        </section>
+        <section name="timesliderendtime">
+            <value><![CDATA[time]]></value>
+        </section>
+        <section name="showrecords">
+            <value><![CDATA[AllRecords]]></value>
+        </section>
+        <section name="displayinterval">
+            <value><![CDATA[1]]></value>
+        </section>
+        <section name="intervalunit">
+            <value><![CDATA[Days]]></value>
         </section>
         <section name="isadddefaultinfowindow">
             <value><![CDATA[false]]></value>
@@ -669,12 +723,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -697,6 +746,9 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
+                </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -704,7 +756,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[Hello]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -739,12 +791,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl_C()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -759,16 +806,19 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#00FFFF]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -800,12 +850,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl_W()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -820,16 +865,19 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#FFFF00]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -861,12 +909,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="iconurl">
-                    <section name="script">
-                        <value><![CDATA[getIconUrl_G()]]></value>
-                        <section name="type">
-                            <value><![CDATA[1]]></value>
-                        </section>
-                    </section>
+                    <value><![CDATA[ ]]></value>
                 </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
@@ -881,16 +924,83 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     <value><![CDATA[0.0]]></value>
                 </section>
                 <section name="linecolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#00FF80]]></value>
                 </section>
                 <section name="linecolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="fillcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="showhighlightstyles">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="highlighticonurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_G()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[0.6]]></value>
+                </section>
+                <section name="highlightlabelscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="highlightlinecolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
+                <section name="shadertype">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
+                </section>
+            </section>
+            <section name="style">
+                <value><![CDATA[latestReportedIcon]]></value>
+                <section name="name">
+                    <value><![CDATA[latestReportedIcon]]></value>
+                </section>
+                <section name="makeasglobalstyle">
                     <value><![CDATA[true]]></value>
+                </section>
+                <section name="iconurl">
+                    <section name="script">
+                        <value><![CDATA[getIconUrl_H()]]></value>
+                        <section name="type">
+                            <value><![CDATA[1]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="iconcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconscale">
+                    <value><![CDATA[0.5]]></value>
+                </section>
+                <section name="labelcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="labelscale">
+                    <value><![CDATA[0.0]]></value>
+                </section>
+                <section name="linecolor">
+                    <value><![CDATA[#00FF80]]></value>
+                </section>
+                <section name="linecolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="linewidth">
+                    <value><![CDATA[1.0]]></value>
+                </section>
+                <section name="fillcolorshader">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showhighlightstyles">
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
@@ -915,152 +1025,6 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
             </section>
         </section>
         <section name="legends">
-            <section name="folder">
-                <section name="name">
-                    <value><![CDATA[Details]]></value>
-                </section>
-                <section name="type">
-                    <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
-                </section>
-                <section name="windowshowbreadcrumbs">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="windowtype">
-                    <value><![CDATA[TabbedView]]></value>
-                </section>
-                <section name="viewerhelp">
-                    <value><![CDATA[#Tabbed_View_Window/About_Tabbed_View_Window.htm]]></value>
-                </section>
-                <section name="loadbydefault">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="windowiconurl">
-                    <value><![CDATA[css/images/<theme>/icon_tabbedviewwindow.png]]></value>
-                </section>
-                <section name="windowgroupname">
-                    <value><![CDATA[Forms]]></value>
-                </section>
-                <section name="windowgroupiconurl">
-                    <value><![CDATA[css/images/<theme>/icon_tabbedviewwindow.png]]></value>
-                </section>
-                <section name="isreloadconfiguration">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="showpluginproperties">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="windowpluginname">
-                    <value><![CDATA[siViewerTabbedViewWindow]]></value>
-                </section>
-                <section name="windowpluginjsfile">
-                    <value><![CDATA[window/tabbed/com.spacetimeinsight.viewer.window.tabbedViewWindow]]></value>
-                </section>
-                <section name="windowfooterpluginname">
-                    <value><![CDATA[siViewerFooter]]></value>
-                </section>
-                <section name="windowfooterpluginjsfile">
-                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
-                </section>
-                <section name="windowwidth">
-                    <value><![CDATA[600]]></value>
-                </section>
-                <section name="windowheight">
-                    <value><![CDATA[350]]></value>
-                </section>
-                <section name="windowtop">
-                    <value><![CDATA[300]]></value>
-                </section>
-                <section name="windowleft">
-                    <value><![CDATA[200]]></value>
-                </section>
-                <section name="isinfowindow">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="hidefrombusinessviewmenu">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isattributelink">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="allowcopy">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isnestedwindow">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="refreshonbusinessviewrefresh">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="datasourcetype">
-                    <value><![CDATA[Artifact]]></value>
-                </section>
-                <section name="datafetcher">
-                    <value><![CDATA[com.spacetimeinsight.renderer.window.data.ArtifactDataFetcher]]></value>
-                </section>
-                <section name="datatransformer">
-                    <value><![CDATA[com.spacetimeinsight.renderer.window.transform.TabbedViewTransformer]]></value>
-                </section>
-                <section name="hasgeographicdata">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="dynamicdatasourceoptimizequery">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="donotloadbydefault">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isbackground">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isshared">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="periodicrefreshrateunits">
-                    <value><![CDATA[Seconds]]></value>
-                </section>
-                <section name="isrefreshoncameramove">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="iscamerasensitive">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="isrefreshonlasso">
-                    <value><![CDATA[true]]></value>
-                </section>
-                <section name="showInDataFilter">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="showfilterpluginproperties">
-                    <value><![CDATA[false]]></value>
-                </section>
-                <section name="filterwindowpluginname">
-                    <value><![CDATA[siViewerClientSideTable]]></value>
-                </section>
-                <section name="filterwindowpluginjsfile">
-                    <value><![CDATA[dataFilter/com.spacetimeinsight.viewer.ui.dataFilter]]></value>
-                </section>
-                <section name="filterwindowdrawerpluginname">
-                    <value><![CDATA[siViewerClientSideTableDrawer]]></value>
-                </section>
-                <section name="filterwindowtoolbarpluginname">
-                    <value><![CDATA[siViewerWindowToolBar]]></value>
-                </section>
-                <section name="filterwindowtoolbarpluginjsfile">
-                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.windowToolBar]]></value>
-                </section>
-                <section name="filterwindowfooterpluginname">
-                    <value><![CDATA[siViewerFooter]]></value>
-                </section>
-                <section name="filterwindowfooterpluginjsfile">
-                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
-                </section>
-                <section name="highlighticonscale">
-                    <value><![CDATA[1.0]]></value>
-                </section>
-            </section>
             <section name="folder">
                 <section name="name">
                     <value><![CDATA[List]]></value>
@@ -1341,7 +1305,7 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                     </section>
                     <section name="row">
                         <section name="column">
-                            <value><![CDATA[Occured]]></value>
+                            <value><![CDATA[ptimeLastSeen]]></value>
                         </section>
                         <section name="column">
                             <value><![CDATA[TextAndHtml]]></value>
@@ -1358,7 +1322,9 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                         <section name="column">
                             <value><![CDATA[None]]></value>
                         </section>
-                        <section name="column"/>
+                        <section name="column">
+                            <value><![CDATA[Left]]></value>
+                        </section>
                     </section>
                     <section name="row">
                         <section name="column">
@@ -1417,6 +1383,152 @@ String getIconUrl_R(){  return "serverresources/FLS/icons/epic/Tracking_Staff_R.
                 </section>
                 <section name="numberofpoints">
                     <value><![CDATA[200]]></value>
+                </section>
+            </section>
+            <section name="folder">
+                <section name="name">
+                    <value><![CDATA[Details]]></value>
+                </section>
+                <section name="type">
+                    <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
+                </section>
+                <section name="windowshowbreadcrumbs">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="windowtype">
+                    <value><![CDATA[TabbedView]]></value>
+                </section>
+                <section name="viewerhelp">
+                    <value><![CDATA[#Tabbed_View_Window/About_Tabbed_View_Window.htm]]></value>
+                </section>
+                <section name="loadbydefault">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="windowiconurl">
+                    <value><![CDATA[css/images/<theme>/icon_tabbedviewwindow.png]]></value>
+                </section>
+                <section name="windowgroupname">
+                    <value><![CDATA[Forms]]></value>
+                </section>
+                <section name="windowgroupiconurl">
+                    <value><![CDATA[css/images/<theme>/icon_tabbedviewwindow.png]]></value>
+                </section>
+                <section name="isreloadconfiguration">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showpluginproperties">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="windowpluginname">
+                    <value><![CDATA[siViewerTabbedViewWindow]]></value>
+                </section>
+                <section name="windowpluginjsfile">
+                    <value><![CDATA[window/tabbed/com.spacetimeinsight.viewer.window.tabbedViewWindow]]></value>
+                </section>
+                <section name="windowfooterpluginname">
+                    <value><![CDATA[siViewerFooter]]></value>
+                </section>
+                <section name="windowfooterpluginjsfile">
+                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
+                </section>
+                <section name="windowwidth">
+                    <value><![CDATA[600]]></value>
+                </section>
+                <section name="windowheight">
+                    <value><![CDATA[350]]></value>
+                </section>
+                <section name="windowtop">
+                    <value><![CDATA[300]]></value>
+                </section>
+                <section name="windowleft">
+                    <value><![CDATA[200]]></value>
+                </section>
+                <section name="isinfowindow">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="hidefrombusinessviewmenu">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="isattributelink">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="allowcopy">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="isnestedwindow">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="refreshonbusinessviewrefresh">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="datasourcetype">
+                    <value><![CDATA[Artifact]]></value>
+                </section>
+                <section name="datafetcher">
+                    <value><![CDATA[com.spacetimeinsight.renderer.window.data.ArtifactDataFetcher]]></value>
+                </section>
+                <section name="datatransformer">
+                    <value><![CDATA[com.spacetimeinsight.renderer.window.transform.TabbedViewTransformer]]></value>
+                </section>
+                <section name="hasgeographicdata">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="dynamicdatasourceoptimizequery">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="donotloadbydefault">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="isbackground">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="isshared">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="isperiodicrefresh">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="periodicrefreshrateunits">
+                    <value><![CDATA[Seconds]]></value>
+                </section>
+                <section name="isrefreshoncameramove">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="iscamerasensitive">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="isrefreshonlasso">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="showInDataFilter">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showfilterpluginproperties">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="filterwindowpluginname">
+                    <value><![CDATA[siViewerClientSideTable]]></value>
+                </section>
+                <section name="filterwindowpluginjsfile">
+                    <value><![CDATA[dataFilter/com.spacetimeinsight.viewer.ui.dataFilter]]></value>
+                </section>
+                <section name="filterwindowdrawerpluginname">
+                    <value><![CDATA[siViewerClientSideTableDrawer]]></value>
+                </section>
+                <section name="filterwindowtoolbarpluginname">
+                    <value><![CDATA[siViewerWindowToolBar]]></value>
+                </section>
+                <section name="filterwindowtoolbarpluginjsfile">
+                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.windowToolBar]]></value>
+                </section>
+                <section name="filterwindowfooterpluginname">
+                    <value><![CDATA[siViewerFooter]]></value>
+                </section>
+                <section name="filterwindowfooterpluginjsfile">
+                    <value><![CDATA[common/com.spacetimeinsight.viewer.ui.footer]]></value>
+                </section>
+                <section name="highlighticonscale">
+                    <value><![CDATA[1.0]]></value>
                 </section>
             </section>
         </section>
