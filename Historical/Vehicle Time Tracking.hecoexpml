@@ -394,11 +394,6 @@
         <section name="blinkloopcount">
             <value><![CDATA[2]]></value>
         </section>
-        <section name="constraints">
-            <section name="constraint">
-                <value><![CDATA[cameraboundary]]></value>
-            </section>
-        </section>
         <section name="listeners"/>
         <section name="layout">
             <section name="folder">
@@ -468,9 +463,9 @@
             <section name="folder">
                 <section name="name">
                     <section name="script">
-                        <value><![CDATA[time]]></value>
+                        <value><![CDATA[getMouseOverLabel()]]></value>
                         <section name="type">
-                            <value><![CDATA[2]]></value>
+                            <value><![CDATA[1]]></value>
                         </section>
                     </section>
                 </section>
@@ -479,9 +474,9 @@
                 </section>
                 <section name="label">
                     <section name="script">
-                        <value><![CDATA[time]]></value>
+                        <value><![CDATA[getMouseOverLabel()]]></value>
                         <section name="type">
-                            <value><![CDATA[2]]></value>
+                            <value><![CDATA[1]]></value>
                         </section>
                     </section>
                 </section>
@@ -490,9 +485,9 @@
                 </section>
                 <section name="hoverlabel">
                     <section name="script">
-                        <value><![CDATA[time]]></value>
+                        <value><![CDATA[getMouseOverLabel()]]></value>
                         <section name="type">
-                            <value><![CDATA[2]]></value>
+                            <value><![CDATA[1]]></value>
                         </section>
                     </section>
                 </section>
@@ -543,7 +538,7 @@ void bindData() {
 			
 	 			Date t = (Date) com.wfp.utils.CommonUtils.stringDateToDate(data.getTime().replace("T"," ").replace(".000Z","" ) );	
 				 t = CommonUtils.parseDate( CommonUtils.formatDate( t ) , IEPICConstants.NEW_PORTAL_DATE_FORMAT );
-			$artefact.addAttribute("time", t );//$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
+				$artefact.addAttribute("time", t );//$artefact.addAttribute("Occured",  DHLUtils.getHumanReadable( CommonUtils.parseDate(data.getTime(), IEPICConstants.NEW_PORTAL_DATE_FORMAT )) );
 	 			$artefact.addAttribute("ptimeLastSeen",  data.getTime() );
 	 			$artefact.addAttribute("localTime", CommonUtils.getLocalTime( offset ,data.getDeviceLocalTime(),IEPICConstants.NEW_PORTAL_DATE_FORMAT )   ) ; 
 				
@@ -555,6 +550,11 @@ void bindData() {
 				$artefact.addAttribute("QRcode", "QRcode");
     				  
 	} 
+}
+String getMouseOverLabel()
+{
+  return $artefact.getAttributeValueAsString("ptimeLastSeen");
+  
 }
 String getFullName(com.wfp.security.form.DeviceBean data)
 {

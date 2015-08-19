@@ -1310,7 +1310,7 @@ String getDeviceCaption()
 }
 String getStyle()
 {		String uid = $artefact.getAttributeValueAsString("userID");
-		if( criticalUserList.contains( uid) ) { return "critical"; }
+		if( criticalUserList.contains( uid) ) {return "critical"; }
 		//else if( safeUserList.contains( uid ) ) { return "latestReported"; }
 		Date time = (Date) $artefact.getAttributeValue("time");	
 		if(time!=null )
@@ -1522,26 +1522,26 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
         </section>
         <section name="globalstyle">
             <section name="style">
-                <value><![CDATA[blinkerstyle]]></value>
+                <value><![CDATA[critical]]></value>
                 <section name="name">
-                    <value><![CDATA[blinkerstyle]]></value>
+                    <value><![CDATA[critical]]></value>
                 </section>
                 <section name="makeasglobalstyle">
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="iconurl">
                     <section name="script">
-                        <value><![CDATA[getIconUrl()]]></value>
+                        <value><![CDATA[getIconUrl_R()]]></value>
                         <section name="type">
                             <value><![CDATA[1]]></value>
                         </section>
                     </section>
                 </section>
-                <section name="iconcolor">
-                    <value><![CDATA[#FF0000]]></value>
-                </section>
                 <section name="iconcolorshader">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="iconscale">
+                    <value><![CDATA[0.9]]></value>
                 </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
@@ -1560,7 +1560,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 </section>
                 <section name="highlighticonurl">
                     <section name="script">
-                        <value><![CDATA[getIconUrl()]]></value>
+                        <value><![CDATA[getIconUrl_R()]]></value>
                         <section name="type">
                             <value><![CDATA[1]]></value>
                         </section>
@@ -1573,16 +1573,16 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[#FF0000]]></value>
                 </section>
                 <section name="highlightlabelscale">
-                    <value><![CDATA[0.5]]></value>
+                    <value><![CDATA[0.8]]></value>
                 </section>
                 <section name="shadertype">
                     <value><![CDATA[com.enterprisehorizons.magma.models.util.Shader]]></value>
                 </section>
             </section>
             <section name="style">
-                <value><![CDATA[critical]]></value>
+                <value><![CDATA[criticalesri]]></value>
                 <section name="name">
-                    <value><![CDATA[critical]]></value>
+                    <value><![CDATA[criticalesri]]></value>
                 </section>
                 <section name="viewertype">
                     <value><![CDATA[Esri]]></value>
@@ -2379,7 +2379,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[com.enterprisehorizons.magma.models.WindowCanvasFeature]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[10]]></value>
                 </section>
                 <section name="windowtitle">
                     <section name="script">
@@ -2441,7 +2441,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[600]]></value>
                 </section>
                 <section name="windowheight">
-                    <value><![CDATA[445]]></value>
+                    <value><![CDATA[400]]></value>
                 </section>
                 <section name="windowtop">
                     <value><![CDATA[350]]></value>
@@ -2492,10 +2492,10 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="periodicrefreshrate">
-                    <value><![CDATA[300]]></value>
+                    <value><![CDATA[10]]></value>
                 </section>
                 <section name="periodicrefreshrateunits">
                     <value><![CDATA[Seconds]]></value>
