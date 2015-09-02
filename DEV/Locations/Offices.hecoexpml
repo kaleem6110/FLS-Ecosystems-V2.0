@@ -1011,6 +1011,16 @@ return min;
                             <section name="table">
                                 <section name="row">
                                     <section name="column">
+                                    <value><![CDATA[QRcode]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Text]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
                                     <value><![CDATA[PLUSGeo-Location]]></value>
                                     </section>
                                     <section name="column">
@@ -1032,16 +1042,6 @@ return min;
                                 <section name="row">
                                     <section name="column">
                                     <value><![CDATA[longitude]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[Text]]></value>
-                                    </section>
-                                    <section name="column"/>
-                                    <section name="column"/>
-                                </section>
-                                <section name="row">
-                                    <section name="column">
-                                    <value><![CDATA[QRcode]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>
@@ -1093,7 +1093,7 @@ return min;
                                 </section>
                                 <section name="row">
                                     <section name="column">
-                                    <value><![CDATA[city]]></value>
+                                    <value><![CDATA[address]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>
@@ -1103,7 +1103,7 @@ return min;
                                 </section>
                                 <section name="row">
                                     <section name="column">
-                                    <value><![CDATA[address]]></value>
+                                    <value><![CDATA[city]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>

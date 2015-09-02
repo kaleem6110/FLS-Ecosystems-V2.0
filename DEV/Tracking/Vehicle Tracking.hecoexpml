@@ -2184,7 +2184,7 @@ return min;
                     <value><![CDATA[#Using_Client_Side_Table.htm]]></value>
                 </section>
                 <section name="loadbydefault">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="windowiconurl">
                     <value><![CDATA[css/images/<theme>/icon_clientsidetable.png]]></value>

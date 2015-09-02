@@ -1543,6 +1543,9 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="iconscale">
                     <value><![CDATA[0.9]]></value>
                 </section>
+                <section name="labelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1690,6 +1693,9 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="iconscale">
                     <value><![CDATA[0.9]]></value>
                 </section>
+                <section name="labelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1720,7 +1726,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="highlightlabelcolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="highlightlabelscale">
                     <value><![CDATA[0.8]]></value>
@@ -1834,6 +1840,9 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="iconscale">
                     <value><![CDATA[0.9]]></value>
                 </section>
+                <section name="labelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -1861,7 +1870,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="highlightlabelcolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="highlightlabelscale">
                     <value><![CDATA[0.8]]></value>
@@ -1975,6 +1984,9 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="iconscale">
                     <value><![CDATA[0.9]]></value>
                 </section>
+                <section name="labelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -2005,7 +2017,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="highlightlabelcolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="highlightlabelscale">
                     <value><![CDATA[0.8]]></value>
@@ -2122,6 +2134,9 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="iconscale">
                     <value><![CDATA[0.9]]></value>
                 </section>
+                <section name="labelcolor">
+                    <value><![CDATA[#FFFFFF]]></value>
+                </section>
                 <section name="labelcolorshader">
                     <value><![CDATA[false]]></value>
                 </section>
@@ -2155,7 +2170,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[1.0]]></value>
                 </section>
                 <section name="highlightlabelcolor">
-                    <value><![CDATA[#000000]]></value>
+                    <value><![CDATA[#FFFFFF]]></value>
                 </section>
                 <section name="highlightlabelscale">
                     <value><![CDATA[0.8]]></value>
@@ -2465,7 +2480,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[false]]></value>
                 </section>
                 <section name="refreshonbusinessviewrefresh">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="datasourcetype">
                     <value><![CDATA[Artifact]]></value>
@@ -2492,7 +2507,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="isperiodicrefresh">
-                    <value><![CDATA[true]]></value>
+                    <value><![CDATA[false]]></value>
                 </section>
                 <section name="periodicrefreshrate">
                     <value><![CDATA[10]]></value>
@@ -3021,7 +3036,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[#URL_Window/About__URL_Window.htm]]></value>
                 </section>
                 <section name="loadbydefault">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="windowiconurl">
                     <value><![CDATA[serverresources/FLS/images/<theme>/legend.png]]></value>
@@ -3220,7 +3235,7 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                     <value><![CDATA[#Using_Client_Side_Table.htm]]></value>
                 </section>
                 <section name="loadbydefault">
-                    <value><![CDATA[false]]></value>
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="windowiconurl">
                     <value><![CDATA[css/images/<theme>/icon_clientsidetable.png]]></value>
@@ -3336,11 +3351,49 @@ String legendURL(){  	return "serverresources/FLS/icons/epic/Staff_Legend.png"; 
                 <section name="iscamerasensitive">
                     <value><![CDATA[false]]></value>
                 </section>
+                <section name="refreshonevents"/>
                 <section name="isrefreshonlasso">
                     <value><![CDATA[true]]></value>
                 </section>
                 <section name="istimeaware">
+                    <value><![CDATA[true]]></value>
+                </section>
+                <section name="datefield">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="datefieldformat">
+                    <value><![CDATA[yyyy-MM-dd HH:mm:ss]]></value>
+                </section>
+                <section name="inputdateformat">
+                    <value><![CDATA[yyyy-MM-dd HH:mm:ss]]></value>
+                </section>
+                <section name="isshowintervals">
                     <value><![CDATA[false]]></value>
+                </section>
+                <section name="defaulttimerange">
+                    <value><![CDATA[startendtime]]></value>
+                </section>
+                <section name="defaultstarttime">
+                    <section name="script">
+                        <value><![CDATA[time]]></value>
+                        <section name="type">
+                            <value><![CDATA[2]]></value>
+                        </section>
+                    </section>
+                </section>
+                <section name="defaultendtime">
+                    <value><![CDATA[time]]></value>
+                </section>
+                <section name="isapplydefaulttimefilter">
+                    <value><![CDATA[false]]></value>
+                </section>
+                <section name="showInTimeFilter">
+                    <value><![CDATA[true]]></value>
                 </section>
                 <section name="filterdatasourcetype">
                     <value><![CDATA[Artifact]]></value>

@@ -1091,6 +1091,16 @@ String getAuthorUrl(){
                             <section name="table">
                                 <section name="row">
                                     <section name="column">
+                                    <value><![CDATA[QRcode]]></value>
+                                    </section>
+                                    <section name="column">
+                                    <value><![CDATA[Text]]></value>
+                                    </section>
+                                    <section name="column"/>
+                                    <section name="column"/>
+                                </section>
+                                <section name="row">
+                                    <section name="column">
                                     <value><![CDATA[PLUSAddress]]></value>
                                     </section>
                                     <section name="column">
@@ -1172,16 +1182,6 @@ String getAuthorUrl(){
                                 <section name="row">
                                     <section name="column">
                                     <value><![CDATA[RepeaterMaps]]></value>
-                                    </section>
-                                    <section name="column">
-                                    <value><![CDATA[Text]]></value>
-                                    </section>
-                                    <section name="column"/>
-                                    <section name="column"/>
-                                </section>
-                                <section name="row">
-                                    <section name="column">
-                                    <value><![CDATA[QRcode]]></value>
                                     </section>
                                     <section name="column">
                                     <value><![CDATA[Text]]></value>

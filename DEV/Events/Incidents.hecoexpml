@@ -2000,7 +2000,7 @@ String getAuthorUrl(){
                                 <value><![CDATA[feedUrl]]></value>
                             </section>
                             <section name="value">
-                                <value><![CDATA[http://trackme-lux-dev.globalepic.lu/kml/images.rss]]></value>
+                                <value><![CDATA[http://trackme-lux-dev.service.emergency.lu/kml/images.rss]]></value>
                             </section>
                         </section>
                     </section>
